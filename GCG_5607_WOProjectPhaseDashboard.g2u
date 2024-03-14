@@ -1,0 +1,1661 @@
+Program.Sub.ScreenSU.Start
+Gui.f_WOProjDash..Create
+Gui.f_WOProjDash..Caption("Work Order Project/Phase Dashboard")
+Gui.f_WOProjDash..Size(15360,10695)
+Gui.f_WOProjDash..MinX(0)
+Gui.f_WOProjDash..MinY(0)
+Gui.f_WOProjDash..Position(0,0)
+Gui.f_WOProjDash..BackColor(-2147483633)
+Gui.f_WOProjDash..MousePointer(0)
+Gui.f_WOProjDash..Event(Resize,f_WOProjDash_Resize)
+Gui.f_WOProjDash..Event(UnLoad,f_WOProjDash_UnLoad)
+Gui.f_WOProjDash.gsgcOpenWO.Create(GsGridControl)
+Gui.f_WOProjDash.gsgcOpenWO.Size(15045,8880)
+Gui.f_WOProjDash.gsgcOpenWO.Position(30,1185)
+Gui.f_WOProjDash.gsgcOpenWO.Anchor(15)
+Gui.f_WOProjDash.gsgcOpenWO.Event(RowCellClick,gsgcOpenWO_RowCellClick)
+Gui.f_WOProjDash.gsgcOpenWO.Event(CellValueChanged,gsgcOpenWO_CellValueChanged)
+Gui.f_WOProjDash.frmSelectOption.Create(Frame)
+Gui.f_WOProjDash.frmSelectOption.Size(4125,645)
+Gui.f_WOProjDash.frmSelectOption.Position(105,120)
+Gui.f_WOProjDash.frmSelectOption.Caption("Select Option")
+Gui.f_WOProjDash.frmSelectOption.FontStyle(True,False,False,False,False)
+Gui.f_WOProjDash.optClosedJobs.Create(Option)
+Gui.f_WOProjDash.optClosedJobs.Size(1425,255)
+Gui.f_WOProjDash.optClosedJobs.Position(45,270)
+Gui.f_WOProjDash.optClosedJobs.Parent("frmSelectOption")
+Gui.f_WOProjDash.optClosedJobs.Caption("Closed WOs")
+Gui.f_WOProjDash.optClosedJobs.Event(Click,optClosedJobs_Click)
+Gui.f_WOProjDash.optOpenJobs.Create(Option)
+Gui.f_WOProjDash.optOpenJobs.Size(1275,255)
+Gui.f_WOProjDash.optOpenJobs.Position(1545,270)
+Gui.f_WOProjDash.optOpenJobs.Parent("frmSelectOption")
+Gui.f_WOProjDash.optOpenJobs.Caption("Open WOs")
+Gui.f_WOProjDash.optOpenJobs.Event(Click,optOpenJobs_Click)
+Gui.f_WOProjDash.optAllJobs.Create(Option)
+Gui.f_WOProjDash.optAllJobs.Size(1035,255)
+Gui.f_WOProjDash.optAllJobs.Position(3000,270)
+Gui.f_WOProjDash.optAllJobs.Parent("frmSelectOption")
+Gui.f_WOProjDash.optAllJobs.Caption("All WOs")
+Gui.f_WOProjDash.optAllJobs.Event(Click,optAllJobs_Click)
+Gui.f_WOProjDash.picGSSLogo.Create(PictureBox)
+Gui.f_WOProjDash.picGSSLogo.Size(4125,960)
+Gui.f_WOProjDash.picGSSLogo.Position(5520,45)
+Gui.f_WOProjDash.lbl1.Create(Label,"Cut Off Date Range:",True,1935,255,0,10530,165,True,0,"Arial",8,-2147483633,0)
+Gui.f_WOProjDash.lbl1.Anchor(9)
+Gui.f_WOProjDash.lbl1.FontStyle(True,False,False,False,False)
+Gui.f_WOProjDash.lbl2.Create(Label,"From:",True,525,255,0,10545,450,True,0,"Arial",8,-2147483633,0)
+Gui.f_WOProjDash.lbl2.Anchor(9)
+Gui.f_WOProjDash.lbl3.Create(Label,"To:",True,330,255,0,10740,840,True,0,"Arial",8,-2147483633,0)
+Gui.f_WOProjDash.lbl3.Anchor(9)
+Gui.f_WOProjDash.dtpFrom.Create(DatePicker)
+Gui.f_WOProjDash.dtpFrom.Size(1935,285)
+Gui.f_WOProjDash.dtpFrom.Position(11265,375)
+Gui.f_WOProjDash.dtpFrom.Anchor(9)
+Gui.f_WOProjDash.dtpTo.Create(DatePicker)
+Gui.f_WOProjDash.dtpTo.Size(1935,285)
+Gui.f_WOProjDash.dtpTo.Position(11265,765)
+Gui.f_WOProjDash.dtpTo.Anchor(9)
+Gui.f_WOProjDash.frmBtns.Create(Frame)
+Gui.f_WOProjDash.frmBtns.Size(1800,1080)
+Gui.f_WOProjDash.frmBtns.Position(13245,45)
+Gui.f_WOProjDash.frmBtns.Anchor(9)
+Gui.f_WOProjDash.frmOpts.Create(Frame)
+Gui.f_WOProjDash.frmOpts.Size(1710,435)
+Gui.f_WOProjDash.frmOpts.Position(45,585)
+Gui.f_WOProjDash.frmOpts.Parent("frmBtns")
+Gui.f_WOProjDash.optView.Create(Option)
+Gui.f_WOProjDash.optView.Size(810,255)
+Gui.f_WOProjDash.optView.Position(30,135)
+Gui.f_WOProjDash.optView.Parent("frmOpts")
+Gui.f_WOProjDash.optView.Caption("View")
+Gui.f_WOProjDash.optEdit.Create(Option)
+Gui.f_WOProjDash.optEdit.Size(810,255)
+Gui.f_WOProjDash.optEdit.Position(855,135)
+Gui.f_WOProjDash.optEdit.Parent("frmOpts")
+Gui.f_WOProjDash.optEdit.Caption("Edit")
+Gui.f_WOProjDash.optEdit.Enabled(False)
+Gui.f_WOProjDash.cmdRefresh.Create(Button)
+Gui.f_WOProjDash.cmdRefresh.Size(555,390)
+Gui.f_WOProjDash.cmdRefresh.Position(45,195)
+Gui.f_WOProjDash.cmdRefresh.Parent("frmBtns")
+Gui.f_WOProjDash.cmdRefresh.Caption("REFRESH")
+Gui.f_WOProjDash.cmdRefresh.Event(Click,cmdRefresh_Click)
+Gui.f_WOProjDash.cmdExport.Create(Button)
+Gui.f_WOProjDash.cmdExport.Size(1035,390)
+Gui.f_WOProjDash.cmdExport.Position(720,195)
+Gui.f_WOProjDash.cmdExport.Parent("frmBtns")
+Gui.f_WOProjDash.cmdExport.Caption("Export")
+Gui.f_WOProjDash.cmdExport.Event(Click,cmdExport_Click)
+Gui.f_WOProjDash.chkHistory.Create(CheckBox)
+Gui.f_WOProjDash.chkHistory.Size(1560,360)
+Gui.f_WOProjDash.chkHistory.Position(135,780)
+Gui.f_WOProjDash.chkHistory.Caption("Include History")
+Gui.f_WOProjDash.chkHistory.Enabled(False)
+Gui.f_WOProjDash.progressBarStatus.Create(ProgressBar)
+Gui.f_WOProjDash.progressBarStatus.Size(4110,255)
+Gui.f_WOProjDash.progressBarStatus.Position(45,330)
+Gui.f_WOProjDash.progressBarStatus.Visible(False)
+Gui.f_WOProjDash.lblStatus.Create(Label,"****Change****",False,4110,255,0,45,105,True,0,"Arial",10,-2147483633,0)
+Gui.f_WOProjDash.lbl4.Create(Label,"Subcomponent:",True,1260,255,0,1770,885,True,0,"Arial",8,-2147483633,0)
+Gui.f_WOProjDash.txtPart.Create(TextBox,"",True,1890,300,0,3045,810,True,0,"Arial",8,-2147483643,1)
+Gui.f_WOProjDash.txtPart.Event(LostFocus,txtPart_LostFocus)
+Gui.f_WOProjDash.cmdInvBrowser.Create(Button)
+Gui.f_WOProjDash.cmdInvBrowser.Size(375,375)
+Gui.f_WOProjDash.cmdInvBrowser.Position(4995,780)
+Gui.f_WOProjDash.cmdInvBrowser.Caption("^")
+Gui.f_WOProjDash.cmdInvBrowser.Event(Click,cmdInvBrowser_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+	V.Global.sCustomer.Declare
+	V.Global.bLoadData.Declare
+	V.Global.bLongPart.Declare
+	v.Global.sFromDate.Declare(string)
+	v.Global.sToDate.Declare(string)
+	v.Global.sFilter.Declare(string)
+Program.External.Include.Library("900200.lib")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'	Author: Daniel Duncan
+'	Customer: Haskris
+'	Program Name: Work Order project Phase Dashboard Var02
+'	Date Started: 7/19/2019
+'	Description: This project is a variant of project 4315.  The differences are: Extra Description for the inventory part, the ability to filter parent and child rows in the grid by part number, the ability to filter the rows loaded by date and work order status (open, closed, or pull all WO's), as well as the ability to load from history
+'	Quote: 11522 - 0
+'	GAP: 5607
+
+'Change History:
+'	1/27/2020 - DD - Added ability to print material pick list along with the barcode work order.  
+
+	f.Intrinsic.Control.Try
+		V.Local.bEditWO.Declare(boolean)
+		v.Local.sBegDate.Declare(date)
+		
+		f.ODBC.Connection!con.OpenCompanyConnection(1200000)
+		f.Intrinsic.Control.CallSub(loadPictureLogo)
+		F.Intrinsic.Control.CallSub(CheckLongPart)
+		F.Intrinsic.Control.CallSub(checktable)
+		
+		gui.f_WOProjDash.optView.Value(True)
+		gui.f_WOProjDash.optEdit.Value(False)
+		gui.f_WOProjDash.optOpenJobs.Value(True)
+		gui.f_WOProjDash.optClosedJobs.Value(False)
+		gui.f_WOProjDash.optAllJobs.Value(False)
+		
+		f.Intrinsic.Date.DateAdd("d",-14,v.Ambient.Date,v.Local.sBegDate)
+		gui.f_WOProjDash.dtpFrom.Value(v.Local.sBegDate)
+		
+		gui.f_WOProjDash..Show
+		F.Intrinsic.Control.BlockEvents
+		F.Intrinsic.Control.CallSub(lockscreen)
+		f.Intrinsic.Control.CallSub(LoadGrid)
+'		f.Intrinsic.Control.If(v.Screen.fEstActDash!chkHistory.checkedasboolean,=,True,"And",v.Screen.fEstActDash!optClosedJobs.Value,=,True)
+'			f.Intrinsic.Control.CallSub(LoadHistData)
+'		f.Intrinsic.Control.ElseIf(v.Screen.fEstActDash!chkHistory.checkedasboolean,=,True,"And",v.Screen.fEstActDash!optallJobs.Value,=,True)
+'			f.Intrinsic.Control.CallSub(LoadHistData)	
+'		f.Intrinsic.Control.EndIf
+		f.Intrinsic.Control.CallSub(FormatGrid)
+		
+		'Check security
+		F.Intrinsic.Control.CallSub(checkpermissions)
+		F.Intrinsic.Control.CallSub(loaddtdvgvmatl)
+		F.Intrinsic.Control.CallSub(loaddtdvgvlbr)
+		F.Intrinsic.Control.CallSub(loaddtdvgvout)
+	
+		F.Intrinsic.Control.CallSub(enablescreen)
+		F.Intrinsic.Control.UnBlockEvents
+		F.Intrinsic.Control.CallSub(Deserialize)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+'--------FORM EVENTS---------
+Program.Sub.f_WOProjDash_UnLoad.Start
+	F.Intrinsic.Control.Try		
+		F.Intrinsic.Control.If(V.Global.bLoadData)
+			F.Intrinsic.Control.CallSub(Serialize)
+		F.Intrinsic.Control.EndIf
+		
+		F.ODBC.Connection!con.Close
+		F.Intrinsic.Control.End
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.f_WOProjDash_UnLoad.End
+
+Program.Sub.f_WOProjDash_Resize.Start
+	F.Intrinsic.Control.Try
+		V.Local.sError.Declare
+		V.Local.iX.Declare
+		
+		F.Intrinsic.Math.Div(V.Screen.f_WOProjDash.Width,2,V.Local.iX)
+		F.Intrinsic.Math.Sub(V.Local.iX,2000,V.Local.iX)
+		gui.f_WOProjDash.picGSSLogo.Position(V.Local.iX,45)
+	
+		'Let Form grow larger than 15375, but not lower
+		F.Intrinsic.Control.If(V.Screen.f_WOProjDash.Width,<,15375)
+			gui.f_WOProjDash..Size(15375,V.Screen.f_WOProjDash.Height)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.f_WOProjDash_Resize.End
+
+Program.Sub.gsgcOpenWO_RowCellClick.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sParams.Declare(String)
+	V.Local.sJob.Declare(String)
+	V.Local.sSuffix.Declare(String)
+	V.Local.sPart.Declare(String)
+	V.Local.sLoc.Declare(String)
+	V.Local.sPO.Declare(String)
+	V.Local.sSQL.Declare(String)
+	V.Local.sRet.Declare(String)
+
+	F.Intrinsic.Control.If(V.Screen.f_WOProjDash!optView.Value,=,True)
+		F.Intrinsic.Control.SelectCase(V.Args.COLUMN)
+			F.Intrinsic.Control.CaseAny("JOB","SUFFIX")
+				F.Intrinsic.Control.CallSub(lockscreen)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","JOB",V.Args.RowIndex,V.Local.sJob)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","SUFFIX",V.Args.RowIndex,V.Local.sSuffix)
+				F.Intrinsic.String.Build("7!*!{0}!*!{1}!*!A",V.Local.sJob,V.Local.sSuffix,V.Local.sParams)
+				F.Global.General.CallWrapperSync(450000,V.Local.sParams)
+				Gui.f_WOProjDash.gsgcOpenWO.Enabled(True)
+				F.Intrinsic.Control.CallSub(enablescreen)
+				F.Intrinsic.Control.ExitSub
+			F.Intrinsic.Control.CaseAny("DISPLAY_PART","LOCATION")
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","PART",V.Args.RowIndex,V.Local.sPart)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","LOCATION",V.Args.RowIndex,V.Local.sLoc)
+				F.Intrinsic.String.Build("{0}!*!{1}!*!O",V.Local.sPart,V.Local.sLoc,V.Local.sParams)
+				F.Intrinsic.Control.CallSub(lockscreen)
+				F.Global.General.CallWrapperSync(300011,V.Local.sParams)
+				Gui.f_WOProjDash.gsgcOpenWO.Enabled(True)
+				F.Intrinsic.Control.CallSub(enablescreen)
+				F.Intrinsic.Control.ExitSub
+			F.Intrinsic.Control.Case("PRINTED")
+				F.Intrinsic.Control.ExitSub
+			F.Intrinsic.Control.Case("RELEASED")
+				F.Intrinsic.Control.ExitSub
+			F.Intrinsic.Control.CaseAny("DISPLAY_PART1","LOCATION1")
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvMatl","PART1",V.Args.RowIndex,V.Local.sPart)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvMatl","LOCATION1",V.Args.RowIndex,V.Local.sLoc)
+				F.Intrinsic.String.Build("{0}!*!{1}!*!O",V.Local.sPart,V.Local.sLoc,V.Local.sParams)
+				F.Intrinsic.Control.CallSub(lockscreen)
+				F.Global.General.CallWrapperSync(300011,V.Local.sParams)
+				Gui.f_WOProjDash.gsgcOpenWO.Enabled(True)
+				F.Intrinsic.Control.CallSub(enablescreen)
+				F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.Else
+	
+		F.Intrinsic.Control.SelectCase(V.Args.COLUMN)
+			F.Intrinsic.Control.CaseAny("JOB","SUFFIX")
+				F.Intrinsic.Control.CallSub(lockscreen)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","JOB",V.Args.RowIndex,V.Local.sJob)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","SUFFIX",V.Args.RowIndex,V.Local.sSuffix)
+				F.Intrinsic.String.Build("{0}!*!{1}!*!O",V.Local.sJob,V.Local.sSuffix,V.Local.sParams)
+				F.Global.General.CallWrapperSync(2009,V.Local.sParams)
+				Gui.f_WOProjDash.gsgcOpenWO.Enabled(True)
+				F.Intrinsic.Control.CallSub(enablescreen)
+				F.Intrinsic.Control.ExitSub
+			F.Intrinsic.Control.CaseAny("DISPLAY_PART","LOCATION")
+				F.Intrinsic.Control.CallSub(lockscreen)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","PART",V.Args.RowIndex,V.Local.sPart)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","LOCATION",V.Args.RowIndex,V.Local.sLoc)
+				F.Intrinsic.String.Build("{0}!*!{1}!*!M",V.Local.sPart,V.Local.sLoc,V.Local.sParams)
+				F.Global.General.CallWrapperSync(300011,V.Local.sParams)
+				Gui.f_WOProjDash.gsgcOpenWO.Enabled(True)
+				F.Intrinsic.Control.CallSub(enablescreen)
+				F.Intrinsic.Control.ExitSub
+			F.Intrinsic.Control.Case("PRINTED")
+				Gui.f_WOProjDash.gsgcOpenWO.SetCellValueByColumnName("gvWOs","PRINTED",V.Args.RowIndex,True)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","JOB",V.Args.RowIndex,V.Local.sJob)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","SUFFIX",V.Args.RowIndex,V.Local.sSuffix)
+				'Print the barcode work order
+				F.Intrinsic.String.ConcatCallWrapperArgs(V.Local.sJob,V.Local.sSuffix,"1811",V.Local.sParams)
+				F.Global.General.CallWrapperSync(900100,V.Local.sParams)
+				'Print the material pick list
+				F.Data.DataTable.AddRow("900200","BegWO",V.Local.sJob,"BegWOSuffix",V.Local.sSuffix,"EndWO",V.Local.sJob,"EndWOSuffix",V.Local.sSuffix)
+				F.Intrinsic.Control.CallSub(900200Sync)
+				
+				F.Intrinsic.Control.ExitSub
+			F.Intrinsic.Control.Case("RELEASED")
+				Gui.f_WOProjDash.gsgcOpenWO.SetCellValueByColumnName("gvWOs","RELEASED",V.Args.RowIndex,True)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","JOB",V.Args.RowIndex,V.Local.sJob)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","SUFFIX",V.Args.RowIndex,V.Local.sSuffix)
+				f.Intrinsic.String.Format(V.Ambient.Date.PervasiveDate,"MMDDYY",V.Local.sRet)
+				F.Intrinsic.Control.If(v.Caller.GSSVersion,<=,"2016.2",)
+					F.Intrinsic.String.Build("UPDATE JOB_HEADER SET FLAG_WO_PRTD = CASE WHEN FLAG_WO_PRTD = '' Then 'X' WHEN FLAG_WO_PRTD = 'Y' Then 'R' END, DATE_RELEASED = '{0}' WHERE JOB = '{1}' AND SUFFIX = '{2}';",V.Local.sRet, V.Local.sJob,V.Local.sSuffix.Trim,V.Local.sSQL)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.String.Build("UPDATE JOB_HEADER SET FLAG_WO_RELEASED = 'Y', DATE_RELEASED = '{0}' WHERE JOB = '{1}' AND SUFFIX = '{2}';",v.Local.sRet,V.Local.sJob,V.Local.sSuffix.Trim,V.Local.sSQL)
+				F.Intrinsic.Control.EndIf
+				F.ODBC.Connection!con.Execute(V.Local.sSQL)
+				F.Intrinsic.Control.ExitSub
+			F.Intrinsic.Control.CaseAny("DISPLAY_PART1","LOCATION1")
+				F.Intrinsic.Control.CallSub(lockscreen)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvMatl","PART1",V.Args.RowIndex,V.Local.sPart)
+				Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvMatl","LOCATION1",V.Args.RowIndex,V.Local.sLoc)
+				F.Intrinsic.String.Build("{0}!*!{1}!*!M",V.Local.sPart,V.Local.sLoc,V.Local.sParams)
+				F.Global.General.CallWrapperSync(300011,V.Local.sParams)
+				Gui.f_WOProjDash.gsgcOpenWO.Enabled(True)
+				F.Intrinsic.Control.CallSub(enablescreen)
+				F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine) 
+	F.Intrinsic.Control.EndTry
+Program.Sub.gsgcOpenWO_RowCellClick.End
+
+Program.Sub.cmdInvBrowser_Click.Start
+	f.Intrinsic.Control.Try
+		v.Local.sRet.Declare(string)
+		F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+		f.Intrinsic.UI.CommonBrowser(100,"",v.Local.sRet)
+		
+		'f.Intrinsic.UI.Browser(100,"",v.Local.sRet)
+		f.Intrinsic.Control.If(v.Local.sRet,!=,"***CANCEL***")
+			f.Intrinsic.String.Split(v.local.sRet,"*!*",v.Local.sRet)
+			GUI.f_WOProjDash.txtPart.Text(V.Local.sRet(0).trim)
+			F.Intrinsic.Control.CallSub(txtPart_LostFocus)
+		f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.cmdInvBrowser_Click.End
+
+Program.Sub.gsgcOpenWO_CellValueChanged.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSQL.Declare(String)
+	V.Local.sJS.Declare(String)
+	V.Local.sJob.Declare(String)
+	V.Local.sSuffix.Declare(String)
+	V.Local.sParams.Declare(String)
+	V.Local.sText.Declare
+
+	F.Intrinsic.Control.If(V.Args.COLUMN,=,"NOTES")
+		Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","JOB",V.Args.RowIndex,V.Local.sJob)
+		Gui.f_WOProjDash.gsgcOpenWO.GetCellValueByColumnName("gvWOs","SUFFIX",V.Args.RowIndex,V.Local.sSuffix)
+		F.Intrinsic.String.Replace(V.Args.Value,"'","''",V.Local.sText)
+		F.Intrinsic.String.Build("{0}{1}",V.Local.sJob,V.Local.sSuffix,V.Local.sJS)
+		F.Intrinsic.String.Build("SELECT * FROM GAB_4135_WO_NOTES WHERE JS = '{0}';",V.Local.sJS,V.Local.sSQL)
+		F.ODBC.Connection!con.OpenRecordsetRW("rstNotes",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.con!rstNotes.EOF,=,True)
+			F.Intrinsic.String.Build("INSERT INTO GAB_4135_WO_NOTES(JS,JOB,SUFFIX,NOTES) VALUES('{0}','{1}','{2}','{3}');",V.Local.sJS,V.Local.sJob,V.Local.sSuffix,V.Local.sText,V.Local.sSQL)
+			F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Build("DELETE FROM GAB_4135_WO_NOTES WHERE JS = '{0}';",V.Local.sJS,V.Local.sSQL)
+			F.ODBC.Connection!con.Execute(V.Local.sSQL)
+			F.Intrinsic.String.Build("INSERT INTO GAB_4135_WO_NOTES(JS,JOB,SUFFIX,NOTES) VALUES('{0}','{1}','{2}','{3}');",V.Local.sJS,V.Local.sJob,V.Local.sSuffix,V.Local.sText,V.Local.sSQL)
+			F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.con!rstNotes.Close
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.gsgcOpenWO_CellValueChanged.End
+
+Program.Sub.cmdExport_Click.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sFileExport.Declare
+	V.Local.bExcel.Declare
+	V.Local.bFileLocked.Declare
+	V.Local.sMsg.Declare
+
+	F.Automation.MSExcel.CheckPresence(V.Local.bExcel)
+	F.Intrinsic.Control.If(V.Local.bExcel)
+			F.Intrinsic.String.Build("{0}\GAB_5607_WorkOrderProjPhaseDash_Export.xlsx",V.Caller.LocalGssTempDir,V.Local.sFileExport)
+			F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+			F.Intrinsic.Control.If(V.Local.bFileLocked)
+				F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+				F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+			F.Intrinsic.Control.Else
+				Gui.f_WOProjDash.gsgcOpenWO.Export(V.Local.sFileExport,"xlsx")
+				F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Build("{0}\GAB_5607_WorkOrderProjPhaseDash_Export.csv",V.Caller.LocalGssTempDir,V.Local.sFileExport)
+			F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+			F.Intrinsic.Control.If(V.Local.bFileLocked)
+				F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+				F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+			F.Intrinsic.Control.Else
+				Gui.f_WOProjDash.gsgcOpenWO.Export(V.Local.sFileExport,"csv")
+			F.Intrinsic.Control.EndIf
+			F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine) 
+	F.Intrinsic.Control.EndTry
+Program.Sub.cmdExport_Click.End
+
+Program.Sub.optOpenJobs_Click.Start
+	f.Intrinsic.Control.Try
+		'If Open Jobs is selected, we cannot include history
+		f.Intrinsic.Control.If(v.Screen.f_WOProjDash!optOpenJobs.value,=,True)
+			gui.f_WOProjDash.chkHistory.Value(0)
+			gui.f_WOProjDash.chkHistory.Enabled(False)
+		f.Intrinsic.Control.Else
+			gui.f_WOProjDash.chkHistory.Enabled(True)
+		f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.optOpenJobs_Click.End
+
+Program.Sub.optClosedJobs_Click.Start
+	'If Open Jobs is not selected, we can include history
+	f.Intrinsic.Control.Try
+		gui.f_WOProjDash.chkHistory.Enabled(True)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.optClosedJobs_Click.End
+
+Program.Sub.optAllJobs_Click.Start
+	'If Open Jobs is not selected, we can include history
+	f.Intrinsic.Control.Try
+		gui.f_WOProjDash.chkHistory.Enabled(True)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.optAllJobs_Click.End
+
+Program.Sub.cmdRefresh_Click.Start
+	F.Intrinsic.Control.Try		
+		F.Intrinsic.Control.If(V.Global.bLoadData)
+			F.Intrinsic.Control.CallSub(Serialize)
+		F.Intrinsic.Control.EndIf
+		
+		'Reset part filter
+		gui.f_WOProjDash.txtPart.Text("")
+		
+		F.Intrinsic.Control.BlockEvents
+		F.Intrinsic.Control.CallSub(lockscreen)
+		F.Intrinsic.Control.CallSub(ReloadGrid)
+		
+		f.Intrinsic.Control.If(v.Screen.f_WOProjDash!chkHistory.checkedasboolean,=,True,"And",v.Screen.f_WOProjDash!optOpenJobs.Value,=,False)
+			f.Intrinsic.Control.CallSub(LoadHistData)
+		f.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.CallSub(ReloadDTDVGVMatl)
+		F.Intrinsic.Control.CallSub(ReloadDTDVGVLbr)
+		F.Intrinsic.Control.CallSub(ReloadDTDVGVOut)
+		F.Intrinsic.Control.CallSub(enablescreen)
+		Gui.f_WOProjDash.cmdRefresh.Enabled(True)
+		F.Intrinsic.Control.UnBlockEvents
+		F.Intrinsic.Control.CallSub(Deserialize)
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine) 
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.cmdRefresh_Click.End
+
+Program.Sub.txtPart_LostFocus.Start
+	f.Intrinsic.Control.Try
+		'When field is left, we need to filter the material subgrid.  We should only display the rows where the part is used in that case.
+		'Set the filter on material, then filter labor, outside, and finally the parent rows
+		F.Intrinsic.Control.BlockEvents
+		v.Local.sFilter.Declare(string,"")
+		v.Local.iCount.Declare(long,0)
+		v.Local.sJSList.Declare(string,"")
+		
+		f.Intrinsic.Control.If(v.Screen.f_WOProjDash!txtPart.text,!=,"")
+			F.Intrinsic.Control.If(V.DataView.dtMatlWorking!dvMatlFltd.Exists)
+				F.Data.DataView.Close("dtMatlWorking","dvMatlFltd")
+			F.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.Control.If(V.DataView.dtMatlWorking!dvMatlFiltered.Exists)
+				F.Data.DataView.Close("dtMatlWorking","dvMatlFiltered")
+			F.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.Control.If(v.DataTable.dtMatlFiltered.Exists)
+				f.Data.DataTable.Close("dtMatlFiltered")
+			f.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.Control.If(V.DataView.dtLbrWorking!dvLbrFltd.Exists)
+				F.Data.DataView.Close("dtLbrWorking","dvLbrFltd")
+			F.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.Control.If(v.DataTable.dtLbrFiltered.Exists)
+				f.Data.DataTable.Close("dtLbrFiltered")
+			f.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.Control.If(V.DataView.dtOutWorking!dvOutFltd.Exists)
+				F.Data.DataView.Close("dtOutWorking","dvOutFltd")
+			F.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.Control.If(v.DataTable.dtOutFiltered.Exists)
+				f.Data.DataTable.Close("dtOutFiltered")
+			f.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.String.Build("PART1 like '{0}%'",v.Screen.f_WOProjDash!txtPart.text,V.Local.sFilter)
+			
+			F.Data.DataView.Create("dtMatlWorking","dvMatlFltd",22,v.Local.sFilter,"")
+			
+			f.Intrinsic.Control.If(v.DataView.dtMatlWorking!dvMatlFltd.RowCount,>,0)
+				'Build the filter
+				f.Intrinsic.Control.For(v.Local.iCount,0,v.DataView.dtMatlWorking!dvMatlFltd.RowCount--,1)
+					f.Intrinsic.Control.If(v.Local.sJSList,!=,"")
+						f.Intrinsic.String.Build("{0},",v.Local.sJSList,v.Local.sJSList)
+					f.Intrinsic.Control.EndIf
+					f.Intrinsic.String.Build("{0}'{1}{2}'",v.Local.sJSList,v.DataView.dtMatlWorking!dvMatlFltd(v.Local.iCount).Job1!FieldValTrim,v.DataView.dtMatlWorking!dvMatlFltd(v.Local.iCount).SFX1!FieldValTrim,v.Local.sJSList)
+				f.Intrinsic.Control.Next(v.Local.iCount)
+				
+				'Filter material (dvMatl)
+				F.Intrinsic.String.Build("JBSF IN ({0})",V.Local.sJSList,V.Local.sFilter)
+				F.Data.DataView.Create("dtMatlWorking","dvMatlFiltered",22,v.Local.sFilter,"")
+				f.Data.DataView.SetFilter("dtMatlWorking","dvMatlFiltered",V.Local.sFilter)
+				f.Data.DataView.ToDataTable("dtMatlWorking","dvMatlFiltered","dtMatlFiltered")
+				f.Data.DataTable.DeleteRow("dtWOs$dtMatl")
+				f.Data.DataTable.Merge("dtMatlFiltered","dtWOs$dtMatl",True,2)
+				
+				'Filter labor (dvLbr), outside (dvOut), and jobs (dvWOs)
+				F.Data.DataView.Create("dtLbrWorking","dvLbrFltd",22,v.Local.sFilter,"")
+				f.Data.DataView.SetFilter("dtLbrWorking","dvLbrFltd",V.Local.sFilter)
+				f.Data.DataView.ToDataTable("dtLbrWorking","dvLbrFltd","dtLbrFiltered")
+				f.Data.DataTable.DeleteRow("dtWOs$dtLbr")
+				f.Data.DataTable.Merge("dtLbrFiltered","dtWOs$dtLbr",True,2)
+				
+				F.Data.DataView.Create("dtOutWorking","dvOutFltd",22,v.Local.sFilter,"")
+				f.Data.DataView.SetFilter("dtOutWorking","dvOutFltd",V.Local.sFilter)
+				f.Data.DataView.ToDataTable("dtOutWorking","dvOutFltd","dtOutFiltered")
+				f.Data.DataTable.DeleteRow("dtWOs$dtOut")
+				f.Data.DataTable.Merge("dtOutFiltered","dtWOs$dtOut",True,2)
+				
+				F.Intrinsic.String.Build("JS IN ({0})",V.Local.sJSList,V.Local.sFilter)
+				f.Data.DataView.SetFilter("dtWOs","dvWOs",v.Local.sFilter)
+			f.Intrinsic.Control.EndIf
+		f.Intrinsic.Control.Else
+			f.Data.DataTable.DeleteRow("dtWOs$dtMatl")
+			f.Data.DataTable.Merge("dtMatlOriginal","dtWOs$dtMatl",True,2)
+			
+			f.Data.DataTable.DeleteRow("dtWOs$dtLbr")
+			f.Data.DataTable.Merge("dtLbrOriginal","dtWOs$dtLbr",True,2)
+			
+			f.Data.DataTable.DeleteRow("dtWOs$dtOut")
+			f.Data.DataTable.Merge("dtOutOriginal","dtWOs$dtOut",True,2)
+			
+			f.Data.DataView.SetFilter("dtWOs","dvWOs","")
+		f.Intrinsic.Control.EndIf
+		
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.Finally
+		F.Intrinsic.Control.UnBlockEvents
+	f.Intrinsic.Control.EndTry
+	
+Program.Sub.txtPart_LostFocus.End
+
+'--------FORM DESIGN-----------
+
+Program.Sub.FormatGrid.Start
+	f.Intrinsic.Control.Try
+		gui.f_WOProjDash.gsgcOpenWO.AddGridViewFromDataView("gvWOs","dtWOs","dvWOs")
+		
+		gui.f_WOProjDash.gsgcOpenWO.SuspendLayout()	
+		
+		gui.f_WOProjDash.gsgcOpenWO.SetGridviewProperty("gvWOs","OptionsViewColumnAutoWidth",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvWOs","MultiSelect",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvWOs","AllowSort",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvWOs","AllowFilter",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvWOs","OptionsDetailShowDetailTabs",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvWOs","OptionsViewShowGroupPanel",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvWOs","EnableAppearanceOddRow",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvWOs","OptionsMenuShowAutoFilterRowItem",True)
+		'gui.f_WOProjDash.gsgcOpenWO.SetGridviewProperty("gvWOs","OptionsFindAlwaysVisible",True)
+		'gui.f_WOProjDash.gsgcOpenWO.SetGridviewProperty("gvWOs","Showgrouppanel",True)
+		
+		gui.f_WOProjDash.gsgcOpenWO.SetGridviewProperty("gvWOs","OptionsViewShowAutoFilterRow",True)
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JS","Visible",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","IND_FLAG","Visible",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PART","Visible",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","Plus","ShowCaption",False)
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRINTED","Caption","Printed ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","RELEASED","Caption","Released ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JOB","Caption","WO ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","SUFFIX","Caption","Suffix ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PROJECT","Caption","Project ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PHASE","Caption","Phase ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DESCR","Caption","Project Description")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EXTRA_DESC","Caption","Extra Description")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NAME_CUSTOMER","Caption","Cust. Name")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DISPLAY_PART","Caption","Part ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","LOCATION","Caption","Loc")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRODUCT_LINE","Caption","PL")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DESCRIPTION","Caption","Description ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_START","Caption","Job Start")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_DUE","Caption","Job End")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EST_HRS","Caption","Est. Hrs.")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","ACT_HRS","Caption","Act. Hrs.")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","REM_HRS","Caption","Rem. Hrs.")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","OPER","Caption","Current Operation")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","QTY_ORDER","Caption","Order Qty.")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PCS_REM","Caption","Pcs. Rem.")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NOTES","Caption","Notes ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_StartDate","Caption","APS Start ")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_DueDate","Caption","APS End ")
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","Plus","Width","10")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRINTED","MinWidth","25")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","RELEASED","MinWidth","25")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JOB","MinWidth","50")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","SUFFIX","MinWidth","25")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PROJECT","MinWidth","75")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PHASE","MinWidth","75")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DESCR","MinWidth","200")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EXTRA_DESC","MinWidth","150")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NAME_CUSTOMER","MinWidth","200")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DISPLAY_PART","MinWidth","150")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","LOCATION","MinWidth","35")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRODUCT_LINE","MinWidth","35")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DESCRIPTION","MinWidth","200")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_START","MinWidth","100")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_DUE","MinWidth","100")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EST_HRS","MinWidth","95")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","ACT_HRS","MinWidth","95")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","REM_HRS","MinWidth","95")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","OPER","MinWidth","200")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","QTY_ORDER","MinWidth","75")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PCS_REM","MinWidth","75")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NOTES","MinWidth","300")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_StartDate","MinWidth","100")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_DueDate","MinWidth","100")
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRINTED","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","RELEASED","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JOB","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","SUFFIX","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","LOCATION","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRODUCT_LINE","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_START","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_DUE","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EST_HRS","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","ACT_HRS","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","REM_HRS","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","QTY_ORDER","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PCS_REM","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_StartDate","HeaderHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_DueDate","HeaderHAlignment","Center")
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRINTED","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","RELEASED","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JOB","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","SUFFIX","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","LOCATION","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRODUCT_LINE","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_START","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_DUE","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EST_HRS","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","ACT_HRS","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","REM_HRS","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","QTY_ORDER","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PCS_REM","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_StartDate","CellHAlignment","Center")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_DueDate","CellHAlignment","Center")
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","Plus","Fixed","Left")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRINTED","Fixed","Left")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","RELEASED","Fixed","Left")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JOB","Fixed","Left")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","SUFFIX","Fixed","Left")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PROJECT","Fixed","Left")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PHASE","Fixed","Left")
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRINTED","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JOB","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","SUFFIX","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PROJECT","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PHASE","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DESCR","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EXTRA_DESC","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NAME_CUSTOMER","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DISPLAY_PART","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","LOCATION","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRODUCT_LINE","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DESCRIPTION","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_START","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_DUE","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EST_HRS","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","ACT_HRS","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","REM_HRS","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","OPER","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","QTY_ORDER","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PCS_REM","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NOTES","ReadOnly",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_StartDate","ReadOnly",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_DueDate","ReadOnly",True)
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRINTED","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","RELEASED","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JOB","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","SUFFIX","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PROJECT","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PHASE","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DESCR","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EXTRA_DESC","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NAME_CUSTOMER","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DISPLAY_PART","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","LOCATION","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PRODUCT_LINE","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DESCRIPTION","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_START","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_DUE","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EST_HRS","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","ACT_HRS","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","REM_HRS","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","OPER","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","QTY_ORDER","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PCS_REM","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NOTES","AllowEdit",True)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_StartDate","AllowEdit",False)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_DueDate","AllowEdit",False)
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","NOTES","CellBackColor","LightYellow")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","JOB","CellForeColor","Blue")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","SUFFIX","CellForeColor","Blue")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DISPLAY_PART","CellForeColor","Blue")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","LOCATION","CellForeColor","Blue")
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_START","DisplayCustomDatetime","d")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DATE_DUE","DisplayCustomDatetime","d")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_StartDate","DisplayCustomDatetime","d")
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","APS_DueDate","DisplayCustomDatetime","d")
+	
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","EST_HRS","DisplayCustomNumeric",n2)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","ACT_HRS","DisplayCustomNumeric",n2)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","REM_HRS","DisplayCustomNumeric",n2)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","QTY_ORDER","DisplayCustomNumeric",n2)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","PCS_REM","DisplayCustomNumeric",n2)
+		
+		Gui.f_WOProjDash.gsgcOpenWO.AddSummaryItem("gvWOs","EST_HRS","EST_HRS","SUM","Total: ","",n2)
+		Gui.f_WOProjDash.gsgcOpenWO.AddSummaryItem("gvWOs","ACT_HRS","ACT_HRS","SUM","Total: ","",n2)
+		Gui.f_WOProjDash.gsgcOpenWO.AddSummaryItem("gvWOs","REM_HRS","REM_HRS","SUM","Total: ","",n2)
+		
+		F.Intrinsic.Control.If(V.Global.bLongPart)
+			Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvWOs","DISPLAY_PART","MinWidth","250")
+		F.Intrinsic.Control.EndIf
+		
+		Gui.f_WOProjDash.gsgcOpenWO.ResumeLayout()
+		gui.f_WOProjDash.gsgcOpenWO.MainView("gvWOs")
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.FormatGrid.End
+
+Program.Sub.LockScreen.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	gui.f_WOProjDash.gsgcOpenWO.Visible(False)
+	gui.f_WOProjDash.frmBtns.Enabled(False)
+	gui.f_WOProjDash.frmOpts.Enabled(False)
+	gui.f_WOProjDash.frmSelectOption.Enabled(False)
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.LockScreen.End
+
+Program.Sub.loadPictureLogo.Start
+f.Intrinsic.Control.Try
+
+	'Load the Logo at the top of dash and the Icon
+	v.Local.sIcon.Declare(String)
+	v.Local.sGssLogo.Declare(String)
+	
+	f.Intrinsic.String.Build("{0}\ART\gss2.ico", v.Caller.GlobalDir, v.Local.sIcon)
+	f.Intrinsic.String.Build("{0}\ART\GAB_GSS_Logo_Green_Dash.png", v.Caller.GlobalDir, v.Local.sGssLogo)
+	gui.f_WOProjDash.picGSSLogo.Picture(v.Local.sGssLogo)
+	gui.f_WOProjDash..Icon(v.Local.sIcon)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.loadPictureLogo.End
+
+Program.Sub.EnableScreen.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	gui.f_WOProjDash.gsgcOpenWO.Visible(True)
+	gui.f_WOProjDash.frmBtns.Enabled(True)
+	gui.f_WOProjDash.frmOpts.Enabled(True)
+	gui.f_WOProjDash.frmSelectOption.Enabled(True)
+	gui.f_WOProjDash.lblStatus.Visible(false)
+	Gui.f_WOProjDash.progressBarStatus.Visible(false)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.EnableScreen.End
+
+'--------DATA MOVEMENT---------
+Program.Sub.ErrorMsg.Start
+v.Local.sError.Declare
+
+'Closes ODBC connection, default to connection : "con"
+f.Intrinsic.Control.If(v.ODBC!con.State, =, 1)
+	f.ODBC.Connection!con.Close
+f.Intrinsic.Control.EndIf
+
+'Generic Error message.
+f.Intrinsic.String.Build("Project GCG_5607_WOProjectPhaseDashboard.g2u {0}{0}Subroutine: {1}{0}Error: {2} with Description: {3}", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+f.Intrinsic.UI.Msgbox(v.Local.sError)
+Program.Sub.ErrorMsg.End
+
+Program.Sub.CheckLongPart.Start
+	F.Global.General.ReadOption("400861",0,False,"0000",V.Global.bLongPart)
+	F.Intrinsic.Control.If(V.Global.bLongPart,=,False)
+		F.Global.General.ReadOption("400861",0,False,"0004",V.Global.bLongPart)
+	F.Intrinsic.Control.EndIf
+Program.Sub.CheckLongPart.End
+
+Program.Sub.LoadGrid.Start
+	f.Intrinsic.Control.Try
+		V.Local.sError.Declare
+	
+		V.Local.iCnt.Declare(Long)
+		V.Local.iProgress.Declare(Long)
+		V.Local.sSQL.Declare(String)
+		V.Local.sRet.Declare(String)
+		V.Local.sJob.Declare(String)
+		V.Local.sSuffix.Declare(String)
+		V.Local.fEstHrs.Declare(Float)
+		V.Local.fRemHrs.Declare(Float)
+		V.Local.fPcsRem.Declare(Float)
+		V.Local.sOper.Declare(String)
+		V.Local.bDictExists.Declare
+		v.Local.sHistorySQL.Declare(string,"")
+		
+		F.Intrinsic.Control.If(V.DataTable.dtWOs.Exists,=,True)
+			F.Data.DataTable.Close("dtWOs")
+		F.Intrinsic.Control.EndIf
+	
+		F.Data.Dictionary.Exists("dIndirect",V.Local.bDictExists)
+		F.Intrinsic.Control.If(V.Local.bDictExists,=,True)
+			F.Data.Dictionary.Close("dIndirect")
+		F.Intrinsic.Control.EndIf
+		
+		V.Global.bLoadData.Set(True)
+		
+		f.Intrinsic.String.format(v.Screen.f_WOProjDash!dtpFrom.Value,"yyyy-MM-DD",v.Global.sFromDate)
+		f.Intrinsic.String.format(v.Screen.f_WOProjDash!dtpTo.Value,"yyyy-MM-DD",v.Global.sToDate)
+		
+		'Format the filter to contain the date closed
+		f.Intrinsic.control.If(v.Screen.f_WOProjDash!optOpenJobs.Value,=,True)
+			v.Global.sFilter.Set("and a.date_closed='1900-1-1'")
+		f.Intrinsic.Control.ElseIf(v.Screen.f_WOProjDash!optClosedJobs.Value,=,True)
+			v.Global.sFilter.Set("and a.date_closed!='1900-1-1'")
+		f.Intrinsic.Control.Else
+			v.Global.sFilter.Set("")
+		f.Intrinsic.Control.EndIf
+	
+		F.Data.Dictionary.CreateFromSQL("dIndirect","con","SELECT DISTINCT CONCAT(JOB,SUFFIX) AS JS,CONVERT(IF('' = '',1,0),SQL_BIT) FROM IND_LBR_ACCTS;")
+		F.Data.Dictionary.SetDefaultReturn("dIndirect",False)
+		
+		f.Intrinsic.Control.If(v.Screen.f_WOProjDash!chkHistory.checkedasboolean,=,True)
+			f.Intrinsic.String.Build("UNION SELECT '' AS Plus,CONVERT(CASE WHEN FLAG_WO_PRTD = 'Y' THEN 1 WHEN FLAG_WO_PRTD = 'X' THEN 0 WHEN FLAG_WO_PRTD = '' THEN 0 WHEN FLAG_WO_PRTD = 'R' THEN 1 END,SQL_BIT) AS PRINTED,CASE WHEN A.wo_rtr_released ='Y' THEN CONVERT(1,SQL_BIT) ELSE CONVERT (0, SQL_BIT) END AS RELEASED,A.JOB,A.SUFFIX,A.PROJECT,PHASE,D.DESCR,B.NAME_CUSTOMER,COALESCE(A.PART,'') AS PART,'' As DISPLAY_PART,LOCATION,PRODUCT_LINE,DESCRIPTION,E.TEXT as EXTRA_DESC,DATE_START,A.DATE_DUE,CONVERT(0,SQL_FLOAT) AS EST_HRS,NUM_HOURS AS ACT_HRS,CONVERT(0,SQL_FLOAT) AS REM_HRS,'' AS OPER,QTY_ORDER,QTY_ORDER - QTY_COMPLETED AS PCS_REM,C.NOTES,CONCAT(A.JOB,A.SUFFIX) AS JS,convert(0,sql_bit) AS IND_FLAG FROM v_job_hist_mast A LEFT JOIN V_CUSTOMER_MASTER B ON A.CUSTOMER = B.CUSTOMER LEFT JOIN GAB_4135_WO_NOTES C ON A.JOB = C.JOB AND A.SUFFIX = C.SUFFIX LEFT JOIN V_PROJECT_HISTORY D ON A.PROJECT = D.PROJECT LEFT JOIN V_INV_EXTRA_TEXT E ON A.PART=E.PART WHERE a.date_due between '{0}' and '{1}'",V.Global.sFromDate,v.Global.sToDate,v.Local.sHistorySQL)
+		f.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.String.Build("SELECT '' AS Plus,CONVERT(CASE WHEN FLAG_WO_PRTD = 'Y' THEN 1 WHEN FLAG_WO_PRTD = 'X' THEN 0 WHEN FLAG_WO_PRTD = '' THEN 0 WHEN FLAG_WO_PRTD = 'R' THEN 1 END,SQL_BIT) AS PRINTED,CASE WHEN A.FLAG_WO_RELEASED ='Y' THEN CONVERT(1,SQL_BIT) ELSE CONVERT (0, SQL_BIT) END AS RELEASED,A.JOB,A.SUFFIX,A.PROJECT,A.PHASE,DESCR,NAME_CUSTOMER,COALESCE(A.PART,'') AS PART,'' As DISPLAY_PART,A.LOCATION,A.PRODUCT_LINE,DESCRIPTION,E.TEXT as EXTRA_DESC,a.DATE_START,a.DATE_DUE,convert('1900-01-01',sql_date) as APS_StartDate, convert('1900-01-01',sql_date) as APS_DueDate,CONVERT(0,SQL_FLOAT) AS EST_HRS,NUM_HOURS AS ACT_HRS,CONVERT(0,SQL_FLOAT) AS REM_HRS,'' AS OPER,QTY_ORDER,QTY_ORDER - QTY_COMPLETED AS PCS_REM,C.NOTES,CONCAT(A.JOB,A.SUFFIX) AS JS,convert(0,sql_bit) AS IND_FLAG FROM V_JOB_HEADER A LEFT JOIN V_CUSTOMER_MASTER B ON A.CUSTOMER = B.CUSTOMER LEFT JOIN GAB_4135_WO_NOTES C ON A.JOB = C.JOB AND A.SUFFIX = C.SUFFIX LEFT JOIN V_PROJECT_MASTER D ON A.PROJECT = D.PROJECT LEFT JOIN V_INV_EXTRA_TEXT E ON A.PART=E.PART WHERE a.date_due between '{0}' and '{1}' {2} {3} ORDER BY DATE_DUE,A.JOB,A.SUFFIX;",V.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,V.Local.sHistorySQL,v.local.sSQL)
+		
+		F.Data.DataTable.CreateFromSQL("dtWOs","con",v.Local.sSQL,True)
+		
+		'Get the Labor Start date for all open orders
+		f.Data.datatable.CreateFromSQL("dtAPS","con","select js, lstart, duedate from apsv3_jbmaster")
+		f.Data.Dictionary.createfromdatatable("dictAPSStart","dtAPS","JS","Lstart")
+		f.Data.Dictionary.createfromdatatable("dictAPSDue","dtAPS","JS","duedate")
+		f.Data.Dictionary.SetDefaultReturn("dictAPSStart","1900-01-01")
+		f.Data.Dictionary.SetDefaultReturn("dictAPSDue","1900-01-01")
+		f.Data.DataTable.FillFromDictionary("dtWOs","dictAPSStart","JS","APS_StartDate")
+		f.Data.DataTable.FillFromDictionary("dtWOs","dictAPSDue","JS","APS_DueDate")
+		f.Data.Dictionary.Close("dictAPSDue")
+		f.Data.Dictionary.Close("dictAPSStart")
+		f.Data.DataTable.Close("dtAPS")
+		
+		V.Global.bLoadData.Set(True)
+		
+		F.Data.DataTable.AddDisplayPartColumn("dtWOs",0,"PART","DISPLAY_PART")
+
+		Gui.f_WOProjDash.lblStatus.Visible(True)
+		Gui.f_WOProjDash.progressBarStatus.Visible(True)
+		Gui.f_WOProjDash.lblStatus.Caption("Loading Work Orders....")
+		Gui.f_WOProjDash.progressBarStatus.Min(0)
+		f.Intrinsic.Control.If(V.DataTable.dtWOs.RowCount,=,0)
+			Gui.f_WOProjDash.progressBarStatus.Max(1)
+		f.Intrinsic.Control.Else
+			Gui.f_WOProjDash.progressBarStatus.Max(V.DataTable.dtWOs.RowCount)
+		f.Intrinsic.Control.EndIf		
+		
+		F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtWOs.RowCount--,1)
+			F.Intrinsic.Math.Add(V.Local.iProgress,1,V.Local.iProgress)
+			Gui.f_WOProjDash.progressBarStatus.Value(V.Local.iProgress)
+			V.Local.sJob.Set(V.DataTable.dtWOs(V.Local.iCnt).JOB!FieldVal)
+			V.Local.sSuffix.Set(V.DataTable.dtWOs(V.Local.iCnt).SUFFIX!FieldVal)
+			F.Intrinsic.String.Build("SELECT TOP 1 SEQTYPE,SEQRES,PCSREMAIN FROM APSV3_JBLINES WHERE COMPLDATE IS NULL AND SEQTYPE='1' AND JOB = '{0}' AND SFX = '{1}' ORDER BY JOB,SFX,SEQ;",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!con.OpenLocalRecordsetRO("rstInfo",V.Local.sSQL)
+				F.Intrinsic.Control.If(V.ODBC.con!rstInfo.EOF,=,True)
+					V.Local.sOper.Set("WipToFG")
+					V.Local.FPcsRem.Set(0)
+				F.Intrinsic.Control.Else
+					V.Local.sOper.Set(V.ODBC.con!rstInfo.FieldValTrim!SEQRES)
+					V.Local.fPcsRem.Set(V.ODBC.con!rstInfo.FieldValFloat!PCSREMAIN)
+				F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstInfo.Close
+	
+			F.Intrinsic.String.Build("SELECT CONVERT(SUM(HOURSORIG+INITSU),SQL_NUMERIC) AS EST_HRS FROM APSV3_JBLINES WHERE SEQTYPE = '1' AND JOB = '{0}' AND SFX = '{1}' GROUP BY JOB,SFX;",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fEstHrs)
+	
+			F.Intrinsic.Control.If(V.Local.fEstHrs,=,0)
+				V.Local.fEstHrs.Set(0.0000)
+				V.Local.fRemHrs.Set(0.0000)
+			F.Intrinsic.Control.ElseIf(V.DataTable.dtWOs(V.Local.iCnt).ACT_HRS!FieldValFloat,>,V.Local.fEstHrs)
+				V.Local.fRemHrs.Set(0.0000)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.Math.Sub(V.Local.fEstHrs,V.DataTable.dtWOs(V.Local.iCnt).ACT_HRS!FieldValFloat,V.Local.fRemHrs)
+			F.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.Control.If(V.Local.sOper,=,"WipToFG")
+				V.Local.fRemHrs.Set(0.0000)
+			F.Intrinsic.Control.EndIf
+	
+			F.Data.DataTable.SetValue("dtWOs",V.Local.iCnt,"EST_HRS",V.Local.fEstHrs,"REM_HRS",V.Local.fRemHrs,"OPER",V.Local.sOper)
+		F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+		F.Data.DataTable.FillFromDictionary("dtWOs","dIndirect","JS","IND_FLAG")
+	
+		'Remove indirect Jobs
+		F.Data.DataView.Create("dtWOs","dvWOs",22,"IND_FLAG <> True","DATE_DUE ASC,JOB ASC,SUFFIX ASC")
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+		
+Program.Sub.LoadGrid.End
+
+Program.Sub.CheckTable.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.bExists.Declare(Boolean)
+
+	Gui.f_WOProjDash.lblStatus.Caption("Checking Database Table....")
+
+	F.ODBC.Connection!con.TableExists("GAB_4135_WO_NOTES",V.Local.bExists)
+	F.Intrinsic.Control.If(V.Local.bExists,=,False)
+		F.ODBC.Connection!con.Execute("CREATE TABLE GAB_4135_WO_NOTES(JS CHAR(9) NOT NULL,JOB CHAR(6),SUFFIX CHAR(3),NOTES LONGVARCHAR,PRIMARY KEY (JS));")
+		F.ODBC.Connection!con.Execute("CREATE INDEX GAB_4135_WO_NOTES01 USING 1 ON GAB_4135_WO_NOTES(JOB);")
+		F.ODBC.Connection!con.Execute("CREATE INDEX GAB_4135_WO_NOTES02 USING 2 ON GAB_4135_WO_NOTES(SUFFIX);")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.CheckTable.End
+
+Program.Sub.Serialize.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSerialize.Declare
+	
+	'gvWOs
+	Gui.f_WOProjDash.gsgcOpenWO.Serialize("gvWOs",V.Local.sSerialize)
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GVWOS",56072,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,V.Local.sSerialize)
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSerialize.Declare
+	
+	'Delete old registry records
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GVWOS",56072,1000,5,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize,<>,"")
+		F.ODBC.Connection!common.OpenCommonConnection
+			F.ODBC.Connection!common.Execute("Delete From Gs_Registry Where Reg_ID = 56072 And Seq < 1000;")
+		F.ODBC.Connection!common.Close
+	F.Intrinsic.Control.EndIf
+
+	'gvWOs
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GVWOS",56072,1000,6,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize,<>,"")
+		Gui.f_WOProjDash.gsgcOpenWO.Deserialize(V.Local.sSerialize)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+Program.Sub.LoadDTDVGVMatl.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	v.Local.sSQL.Declare(string)
+	V.Local.iRet.Declare
+	V.Local.iCnt.Declare
+
+	f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB AS JOB1,A.SUFFIX AS SFX1,A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,C.LOCATION AS LOCATION1,A.DESCRIPTION AS DESCR,E.VENDOR,E.PURCHASE_ORDER,LEFT(E.RECORD_NO,3) AS LINE,IF(E.DATE_DUE_LINE = '1900-1-1',NULL,E.DATE_DUE_LINE) AS DATE_DUE_LINE,D.AMT_COST,B.PCSTOPROD,B.PCSCOMPL,B.PCSREMAIN,IF(D.QTY_ONHAND IS NULL,'0.0000',D.QTY_ONHAND) AS QTY_ONHAND,IF(D.QTY_ONORDER_PO IS NULL,'0.0000',D.QTY_ONORDER_PO) AS QTY_ONORDER_PO,IF(D.QTY_ONORDER_WO IS NULL,'0.0000',D.QTY_ONORDER_WO) AS QTY_ONORDER_WO,IF(D.QTY_REQUIRED IS NULL,'0.0000',D.QTY_REQUIRED) AS QTY_REQUIRED FROM JOB_OPERATIONS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS LEFT JOIN JOB_HEADER C ON A.JOB = C.JOB AND A.SUFFIX = C.SUFFIX LEFT JOIN INVENTORY_MSTR D ON A.PART = D.PART AND C.LOCATION = D.LOCATION LEFT JOIN V_PO_LINES E ON A.JOB = E.JOB AND A.SUFFIX = E.SUFFIX AND A.SEQ = E.SEQUENCE WHERE A.LMO = 'M' AND A.SEQ NOT IN ('995000','998000') AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HEADER a where a.date_due between '{0}' and '{1}' {2}) ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.Local.sSQL)
+	F.Data.DataTable.CreateFromSQL("dtWOs$dtMatl","con",v.Local.sSQL,True)
+	'f.Data.DataTable.Clone("dtWOs$dtMatl","dtMatlOriginal",True)
+	'F.Data.DataTable.Clone("dtWOs$dtMatl","dtMatlWorking",True)
+	F.Data.DataTable.AddDisplayPartColumn("dtWOs$dtMatl",0,"PART1","DISPLAY_PART1")
+	F.Data.DataView.Create("dtWOs$dtMatl","dvMatl")
+	f.Data.DataView.ToDataTable("dtWOs","dvMatl","dtMatlOriginal",True)
+	f.Data.DataView.ToDataTable("dtWOs","dvMatl","dtMatlWorking",True)
+	F.Data.DataTable.AddRelation("dtWOs","JS","dtWOs$dtMatl","JBSF","Material")
+
+	Gui.f_WOProjDash.gsgcOpenWO.AddGridViewFromDataView("gvMatl","dtWOs","dvMatl")
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvMatl","MultiSelect",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvMatl","OptionBehaviorEditable",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvMatl","ReadOnly",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvMatl","AllowSort",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvMatl","AllowFilter",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvMatl","OptionsDetailShowDetailTabs",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvMatl","OptionsViewShowGroupPanel",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvMatl","AllowColumnMoving",False)
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","JBSF","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","JSS","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","JOB1","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","SFX1","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PART1","Visible",False)
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","SEQ1","Caption","Seq ")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DISPLAY_PART1","Caption","Part ")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LOCATION1","Caption","Loc")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DESCR","Caption","Description")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","VENDOR","Caption","Vendor ")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PURCHASE_ORDER","Caption","PO")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LINE","Caption","PO Line")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DATE_DUE_LINE","Caption","Due Date")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","AMT_COST","Caption","Unit Cost")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSTOPROD","Caption","Qty. Req'd")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSCOMPL","Caption","Qty. Issued")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSREMAIN","Caption","Qty. Rem.")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONHAND","Caption","On Hand")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONORDER_PO","Caption","On Order PO")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONORDER_WO","Caption","On Order WO")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_REQUIRED","Caption","Total Req'd")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","SEQ1","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DISPLAY_PART1","MinWidth","150")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LOCATION1","MinWidth","25")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DESCR","MinWidth","200")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","VENDOR","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PURCHASE_ORDER","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LINE","MinWidth","35")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DATE_DUE_LINE","MinWidth","100")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","AMT_COST","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSTOPROD","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSCOMPL","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSREMAIN","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONHAND","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONORDER_PO","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONORDER_WO","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_REQUIRED","MinWidth","75")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","SEQ1","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LOCATION1","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","VENDOR","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PURCHASE_ORDER","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LINE","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DATE_DUE_LINE","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","AMT_COST","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSTOPROD","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSCOMPL","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSREMAIN","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONHAND","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONORDER_PO","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONORDER_WO","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_REQUIRED","HeaderHAlignment","Center")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","SEQ1","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LOCATION1","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","VENDOR","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PURCHASE_ORDER","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LINE","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DATE_DUE_LINE","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","AMT_COST","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSTOPROD","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSCOMPL","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PCSREMAIN","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONHAND","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONORDER_PO","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_ONORDER_WO","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","QTY_REQUIRED","CellHAlignment","Center")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","SEQ1","Fixed","Left")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DISPLAY_PART1","CellFontUnderline",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LOCATION1","CellFontUnderline",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PURCHASE_ORDER","CellFontUnderline",True)
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DISPLAY_PART1","CellForeColor","Blue")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","LOCATION1","CellForeColor","Blue")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","PURCHASE_ORDER","CellForeColor","Blue")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","AMT_COST","DisplayCustomNumeric","$#,###,###,##0.0000")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DATE_DUE_LINE","DisplayCustomDatetime","d")
+	
+	F.Intrinsic.Control.If(V.Global.bLongPart)
+		Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvMatl","DISPLAY_PART1","MinWidth","250")
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtWOs$dtMatl.RowCount--,1)
+		Function.Intrinsic.Math.Mod(V.Local.iCnt,2,V.Local.iRet)
+		Function.Intrinsic.Control.If(V.Local.iRet,=,0)
+			Gui.f_WOProjDash.gsgcOpenWO.SetRowAppearance("gvMatl",V.Local.iCnt,"BackColor","AliceBlue")
+		Function.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine) 
+	F.Intrinsic.Control.EndTry
+Program.Sub.LoadDTDVGVMatl.End
+
+Program.Sub.LoadDTDVGVLbr.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	v.Local.sSQL.Declare(string)
+	V.Local.iRet.Declare
+	V.Local.iCnt.Declare
+	
+	f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB,A.SUFFIX,A.SEQ,B.SEQRES,B.DESCR,B.STARTDATE,B.DUEDATE,B.COMPLDATE,A.CODE_SORT_OPER,B.OVERLAP,B.NOMACH,B.FLOAT,B.HOURSORIG AS EST_HRS,B.HOURSAPPL AS ACT_HRS,B.HOURSREM AS REM_HRS,B.PCSTOPROD AS ORDER_QTY,B.PCSCOMPL AS COMPL_QTY,B.PCSREMAIN AS PCS_REM FROM JOB_OPERATIONS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS WHERE A.LMO = 'L' AND A.SEQ NOT IN ('996000','998500') AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HEADER a WHERE a.date_due between '{0}' and '{1}' {2}) ORDER BY A.JOB,A.SUFFIX,A.SEQ;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.local.sSQL)
+	F.Data.DataTable.CreateFromSQL("dtWOs$dtLbr","con",v.Local.sSQL,True)
+	F.Data.DataView.Create("dtWOs$dtLbr","dvLbr")
+	f.Data.DataView.ToDataTable("dtWOs","dvLbr","dtLbrOriginal",True)
+	f.Data.DataView.ToDataTable("dtWOs","dvLbr","dtLbrWorking",True)
+	F.Data.DataTable.AddRelation("dtWOs","JS","dtWOs$dtLbr","JBSF","Labor")
+
+	Gui.f_WOProjDash.gsgcOpenWO.AddGridViewFromDataView("gvLbr","dtWOs","dvLbr")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvLbr","MultiSelect",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvLbr","OptionBehaviorEditable",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvLbr","ReadOnly",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvLbr","AllowSort",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvLbr","AllowFilter",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvLbr","OptionsDetailShowDetailTabs",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvLbr","OptionsViewShowGroupPanel",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvLbr","AllowColumnMoving",False)
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","JBSF","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","JSS","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","JOB","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SUFFIX","Visible",False)
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","OVERLAP","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","NOMACH","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","FLOAT","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","EST_HRS","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ACT_HRS","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","REM_HRS","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ORDER_QTY","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPL_QTY","DisplayCustomNumeric","#,###,###,##0.00")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","PCS_REM","DisplayCustomNumeric","#,###,###,##0.00")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SEQ","Caption","Seq ")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SEQRES","Caption","WC")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","DESCR","Caption","Description")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","STARTDATE","Caption","Start Date")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","DUEDATE","Caption","Due Date")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPLDATE","Caption","Compl. Date")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","CODE_SORT_OPER","Caption","Sort Code")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","OVERLAP","Caption","Overlap")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","NOMACH","Caption","WC Factor")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","FLOAT","Caption","Float")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","EST_HRS","Caption","Est. Hrs.")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ACT_HRS","Caption","Act. Hrs.")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","REM_HRS","Caption","Rem. Hrs.")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ORDER_QTY","Caption","Order Qty.")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPL_QTY","Caption","Comp. Qty.")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","PCS_REM","Caption","Rem. Qty.")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SEQ","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SEQRES","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","DESCR","MinWidth","200")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","STARTDATE","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","DUEDATE","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPLDATE","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","CODE_SORT_OPER","MinWidth","100")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","OVERLAP","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","NOMACH","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","FLOAT","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","EST_HRS","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ACT_HRS","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","REM_HRS","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ORDER_QTY","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPL_QTY","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","PCS_REM","MinWidth","75")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SEQ","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","STARTDATE","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","DUEDATE","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPLDATE","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","OVERLAP","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","NOMACH","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","FLOAT","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","EST_HRS","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ACT_HRS","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","REM_HRS","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ORDER_QTY","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPL_QTY","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","PCS_REM","HeaderHAlignment","Center")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SEQ","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","STARTDATE","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","DUEDATE","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPLDATE","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","OVERLAP","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","NOMACH","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","FLOAT","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","EST_HRS","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ACT_HRS","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","REM_HRS","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","ORDER_QTY","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPL_QTY","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","PCS_REM","CellHAlignment","Center")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SEQ","Fixed","Left")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","SEQRES","CellTrimming","Character")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","STARTDATE","DisplayCustomDatetime","d")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","DUEDATE","DisplayCustomDatetime","d")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvLbr","COMPLDATE","DisplayCustomDatetime","d")
+
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtWOs$dtLbr.RowCount--,1)
+		Function.Intrinsic.Math.Mod(V.Local.iCnt,2,V.Local.iRet)
+		Function.Intrinsic.Control.If(V.Local.iRet,=,0)
+			Gui.f_WOProjDash.gsgcOpenWO.SetRowAppearance("gvLbr",V.Local.iCnt,"BackColor","AliceBlue")
+		Function.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.LoadDTDVGVLbr.End
+
+Program.Sub.LoadDTDVGVOut.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	v.Local.sSQL.Declare(string)
+	V.Local.iRet.Declare
+	V.Local.iCnt.Declare
+
+	f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB,A.SUFFIX,A.SEQ,C.NAME_VENDOR,B.DESCR,B.STARTDATE,B.DUEDATE,B.COMPLDATE,D.PURCHASE_ORDER AS PURCHASE_ORDER2,LEFT(D.RECORD_NO,3) AS LINE2 FROM JOB_OPERATIONS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS LEFT JOIN V_VENDOR_MASTER C ON B.OPCODE = C.VENDOR LEFT JOIN V_PO_LINES D ON A.JOB = D.JOB AND A.SUFFIX = D.SUFFIX AND A.SEQ = D.SEQUENCE WHERE A.LMO = 'O' AND A.SEQ < 995000 AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HEADER a WHERE a.date_due between '{0}' and '{1}' {2}) ORDER BY A.JOB,A.SUFFIX,A.SEQ;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.Local.sSQL)
+	F.Data.DataTable.CreateFromSQL("dtWOs$dtOut","con",v.Local.sSQL,True)
+	F.Data.DataView.Create("dtWOs$dtOut","dvOut")
+	f.Data.DataView.ToDataTable("dtWOs","dvOut","dtOutOriginal",True)
+	f.Data.DataView.ToDataTable("dtWOs","dvOut","dtOutWorking",True)
+	F.Data.DataTable.AddRelation("dtWOs","JS","dtWOs$dtOut","JBSF","Outside")
+
+	Gui.f_WOProjDash.gsgcOpenWO.AddGridViewFromDataView("gvOut","dtWOs","dvOut")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvOut","MultiSelect",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvOut","OptionBehaviorEditable",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvOut","ReadOnly",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvOut","AllowSort",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvOut","AllowFilter",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvOut","OptionsDetailShowDetailTabs",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvOut","OptionsViewShowGroupPanel",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetGridViewProperty("gvOut","AllowColumnMoving",False)
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","JBSF","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","JSS","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","JOB","Visible",False)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","SUFFIX","Visible",False)
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","SEQ","Caption","Seq ")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","NAME_VENDOR","Caption","Vend. Name")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","DESCR","Caption","Description")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","STARTDATE","Caption","Start Date")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","DUEDATE","Caption","Due Date")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","COMPLDATE","Caption","Comp. Date")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","PURCHASE_ORDER2","Caption","PO")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","LINE2","Caption","PO Line")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","SEQ","MinWidth","75")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","NAME_VENDOR","MinWidth","175")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","DESCR","MinWidth","200")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","STARTDATE","MinWidth","100")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","DUEDATE","MinWidth","100")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","COMPLDATE","MinWidth","100")	
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","PURCHASE_ORDER2","MinWidth","100")	
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","LINE2","MinWidth","100")	
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","SEQ","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","STARTDATE","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","DUEDATE","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","COMPLDATE","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","PURCHASE_ORDER2","HeaderHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","LINE2","HeaderHAlignment","Center")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","SEQ","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","STARTDATE","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","DUEDATE","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","COMPLDATE","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","PURCHASE_ORDER2","CellHAlignment","Center")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","LINE2","CellHAlignment","Center")
+	
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","PURCHASE_ORDER2","CellFontUnderline",True)
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","LINE2","CellFontUnderline",True)
+	
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","PURCHASE_ORDER2","CellForeColor","Blue")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","LINE2","CellForeColor","Blue")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","SEQ","Fixed","Left")
+
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","STARTDATE","DisplayCustomDatetime","d")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","DUEDATE","DisplayCustomDatetime","d")
+	Gui.f_WOProjDash.gsgcOpenWO.SetColumnProperty("gvOut","COMPLDATE","DisplayCustomDatetime","d")
+
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtWOs$dtOut.RowCount--,2)
+		Gui.f_WOProjDash.gsgcOpenWO.SetRowAppearance("gvOut",V.Local.iCnt,"BackColor","AliceBlue")
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.LoadDTDVGVOut.End
+
+Program.Sub.CheckPermissions.Start
+	F.Intrinsic.Control.Try	
+		V.Local.bEditWO.Declare
+	
+		'New WO
+		F.Global.Security.CheckUserAccessIPM(527,1,V.Local.bEditWO)
+		F.Intrinsic.Control.If(V.Local.bEditWO,=,False)
+			'Open WO
+			F.Global.Security.CheckUserAccessIPM(527,2,V.Local.bEditWO)
+		F.Intrinsic.Control.EndIf
+	
+		F.Intrinsic.Control.If(V.Local.bEditWO,=,True)
+			Gui.f_WOProjDash.optEdit.Enabled(True)
+		F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine) 
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.CheckPermissions.End
+
+Program.Sub.ReloadGrid.Start
+	f.Intrinsic.Control.Try
+		V.Local.iCnt.Declare(Long)
+		V.Local.iProgress.Declare(Long)
+		V.Local.sSQL.Declare(String)
+		V.Local.sRet.Declare(String)
+		V.Local.sJob.Declare(String)
+		V.Local.sSuffix.Declare(String)
+		V.Local.fEstHrs.Declare(Float)
+		V.Local.fRemHrs.Declare(Float)
+		V.Local.fPcsRem.Declare(Float)
+		V.Local.sOper.Declare(String)
+		V.Local.bDictExists.Declare
+		V.Local.sHistorySQL.Declare(string,"")
+		
+		F.Intrinsic.Control.If(V.DataTable.dtWOsTemp.Exists,=,True)
+			F.Data.DataTable.Close("dtWOsTemp")
+		F.Intrinsic.Control.EndIf
+	
+		F.Data.Dictionary.Exists("dIndirectTemp",V.Local.bDictExists)
+		F.Intrinsic.Control.If(V.Local.bDictExists,=,True)
+			F.Data.Dictionary.Close("dIndirectTemp")
+		F.Intrinsic.Control.EndIf
+		
+		V.Global.bLoadData.Set(True)
+		
+		f.Intrinsic.String.format(v.Screen.f_WOProjDash!dtpFrom.Value,"yyyy-MM-DD",v.Global.sFromDate)
+		f.Intrinsic.String.format(v.Screen.f_WOProjDash!dtpTo.Value,"yyyy-MM-DD",v.Global.sToDate)
+		
+		'Format the filter to contain the date closed
+		f.Intrinsic.control.If(v.Screen.f_WOProjDash!optOpenJobs.Value,=,True)
+			v.Global.sFilter.Set("and a.date_closed='1900-1-1'")
+		f.Intrinsic.Control.ElseIf(v.Screen.f_WOProjDash!optClosedJobs.Value,=,True)
+			v.Global.sFilter.Set("and a.date_closed!='1900-1-1'")
+		f.Intrinsic.Control.Else
+			v.Global.sFilter.Set("")
+		f.Intrinsic.Control.EndIf
+	
+		F.Data.Dictionary.CreateFromSQL("dIndirectTemp","con","SELECT DISTINCT CONCAT(JOB,SUFFIX) AS JS,CONVERT(IF('' = '',1,0),SQL_BIT) FROM IND_LBR_ACCTS;")
+		F.Data.Dictionary.SetDefaultReturn("dIndirectTemp",False)
+		
+		F.Intrinsic.String.Build("SELECT '' AS Plus,CONVERT(CASE WHEN FLAG_WO_PRTD = 'Y' THEN 1 WHEN FLAG_WO_PRTD = 'X' THEN 0 WHEN FLAG_WO_PRTD = '' THEN 0 WHEN FLAG_WO_PRTD = 'R' THEN 1 END,SQL_BIT) AS PRINTED,CASE WHEN A.FLAG_WO_RELEASED ='Y' THEN CONVERT(1,SQL_BIT) ELSE CONVERT (0, SQL_BIT) END AS RELEASED,A.JOB,A.SUFFIX,A.PROJECT,PHASE,DESCR,NAME_CUSTOMER,COALESCE(A.PART,'') AS PART,'' As DISPLAY_PART,LOCATION,PRODUCT_LINE,DESCRIPTION,E.TEXT as EXTRA_DESC,DATE_START,A.DATE_DUE,convert('1900-01-01',sql_date) as APS_StartDate, convert('1900-01-01',sql_date) as APS_DueDate,CONVERT(0,SQL_FLOAT) AS EST_HRS,NUM_HOURS AS ACT_HRS,CONVERT(0,SQL_FLOAT) AS REM_HRS,'' AS OPER,QTY_ORDER,QTY_ORDER - QTY_COMPLETED AS PCS_REM,C.NOTES,CONCAT(A.JOB,A.SUFFIX) AS JS,convert(0,sql_bit) AS IND_FLAG FROM V_JOB_HEADER A LEFT JOIN V_CUSTOMER_MASTER B ON A.CUSTOMER = B.CUSTOMER LEFT JOIN GAB_4135_WO_NOTES C ON A.JOB = C.JOB AND A.SUFFIX = C.SUFFIX LEFT JOIN V_PROJECT_MASTER D ON A.PROJECT = D.PROJECT LEFT JOIN V_INV_EXTRA_TEXT E ON A.PART=E.PART WHERE a.date_due between '{0}' and '{1}' {2} ORDER BY DATE_DUE,A.JOB,A.SUFFIX;",V.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.local.sSQL)
+		
+		F.Data.DataTable.CreateFromSQL("dtWOsTemp","con",v.Local.sSQL,True)
+		
+		'Get the Labor Start date for all open orders
+		f.Data.datatable.CreateFromSQL("dtAPS","con","select js, lstart, duedate from apsv3_jbmaster")
+		f.Data.Dictionary.createfromdatatable("dictAPSStart","dtAPS","JS","Lstart")
+		f.Data.Dictionary.createfromdatatable("dictAPSDue","dtAPS","JS","duedate")
+		f.Data.Dictionary.SetDefaultReturn("dictAPSStart","1900-01-01")
+		f.Data.Dictionary.SetDefaultReturn("dictAPSDue","1900-01-01")
+		f.Data.DataTable.FillFromDictionary("dtWOsTemp","dictAPSStart","JS","APS_StartDate")
+		f.Data.DataTable.FillFromDictionary("dtWOsTemp","dictAPSDue","JS","APS_DueDate")
+		f.Data.Dictionary.Close("dictAPSDue")
+		f.Data.Dictionary.Close("dictAPSStart")
+		f.Data.DataTable.Close("dtAPS")
+		
+		V.Global.bLoadData.Set(True)
+		
+		F.Data.DataTable.AddDisplayPartColumn("dtWOsTemp",0,"PART","DISPLAY_PART")
+
+		Gui.f_WOProjDash.lblStatus.Visible(True)
+		Gui.f_WOProjDash.progressBarStatus.Visible(True)
+		Gui.f_WOProjDash.lblStatus.Caption("Loading Work Orders....")
+		Gui.f_WOProjDash.progressBarStatus.Min(0)
+		f.Intrinsic.Control.If(V.DataTable.dtWOsTemp.RowCount,=,0)
+			Gui.f_WOProjDash.progressBarStatus.Max(1)
+		f.Intrinsic.Control.Else
+			Gui.f_WOProjDash.progressBarStatus.Max(V.DataTable.dtWOsTemp.RowCount)
+		f.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtWOsTemp.RowCount--,1)
+			F.Intrinsic.Math.Add(V.Local.iProgress,1,V.Local.iProgress)
+			Gui.f_WOProjDash.progressBarStatus.Value(V.Local.iProgress)
+			V.Local.sJob.Set(V.DataTable.dtWOsTemp(V.Local.iCnt).JOB!FieldVal)
+			V.Local.sSuffix.Set(V.DataTable.dtWOsTemp(V.Local.iCnt).SUFFIX!FieldVal)
+			F.Intrinsic.String.Build("SELECT TOP 1 SEQTYPE,SEQRES,PCSREMAIN FROM APSV3_JBLINES WHERE COMPLDATE IS NULL AND JOB = '{0}' AND SFX = '{1}' and seqtype='1' ORDER BY JOB,SFX,SEQ;",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!con.OpenLocalRecordsetRO("rstInfo",V.Local.sSQL)
+				F.Intrinsic.Control.If(V.ODBC.con!rstInfo.EOF,=,True)
+					V.Local.sOper.Set("WipToFG")
+					V.Local.FPcsRem.Set(0)
+				F.Intrinsic.Control.Else
+					V.Local.sOper.Set(V.ODBC.con!rstInfo.FieldValTrim!SEQRES)
+					V.Local.fPcsRem.Set(V.ODBC.con!rstInfo.FieldValFloat!PCSREMAIN)
+				F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstInfo.Close
+	
+			F.Intrinsic.String.Build("SELECT CONVERT(SUM(HOURSORIG+INITSU),SQL_NUMERIC) AS EST_HRS FROM APSV3_JBLINES WHERE SEQTYPE = '1' AND JOB = '{0}' AND SFX = '{1}' GROUP BY JOB,SFX;",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fEstHrs)
+	
+			F.Intrinsic.Control.If(V.Local.fEstHrs,=,0)
+				V.Local.fEstHrs.Set(0.0000)
+				V.Local.fRemHrs.Set(0.0000)
+			F.Intrinsic.Control.ElseIf(V.DataTable.dtWOsTemp(V.Local.iCnt).ACT_HRS!FieldValFloat,>,V.Local.fEstHrs)
+				V.Local.fRemHrs.Set(0.0000)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.Math.Sub(V.Local.fEstHrs,V.DataTable.dtWOsTemp(V.Local.iCnt).ACT_HRS!FieldValFloat,V.Local.fRemHrs)
+			F.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.Control.If(V.Local.sOper,=,"WipToFG")
+				V.Local.fRemHrs.Set(0.0000)
+			F.Intrinsic.Control.EndIf
+	
+			F.Data.DataTable.SetValue("dtWOsTemp",V.Local.iCnt,"EST_HRS",V.Local.fEstHrs,"REM_HRS",V.Local.fRemHrs,"OPER",V.Local.sOper)
+		F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+		F.Data.DataTable.FillFromDictionary("dtWOsTemp","dIndirectTemp","JS","IND_FLAG")
+	
+		'Remove indirect Jobs
+		F.Data.DataView.Create("dtWOsTemp","dvWOs",22,"IND_FLAG <> True","DATE_DUE ASC,JOB ASC,SUFFIX ASC")
+		
+		'Create temp table, delete rows out of original, merge the two
+		f.Data.DataTable.DeleteRow("dtWOs")
+		f.Data.Datatable.acceptchanges("dtWOs")
+		f.Data.DataTable.Merge("dtWOsTemp","dtWOs",True,2)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.ReloadGrid.End
+
+Program.Sub.ReloadDTDVGVMatl.Start
+	f.Intrinsic.Control.Try	
+		v.Local.sSQL.Declare(string)
+		
+		f.Intrinsic.Control.If(v.DataTable.dtMatlTemp.Exists)
+			f.Data.DataTable.Close("dtMatlTemp")
+		f.Intrinsic.Control.EndIf
+		
+		f.Intrinsic.Control.If(v.DataTable.dtMatlHistTemp.Exists)
+			f.Data.DataTable.Close("dtMatlHistTemp")
+		f.Intrinsic.Control.EndIf
+		
+		'Create temp table, delete rows out of original, merge the two
+		f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB AS JOB1,A.SUFFIX AS SFX1,A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,C.LOCATION AS LOCATION1,A.DESCRIPTION AS DESCR,E.VENDOR,E.PURCHASE_ORDER,LEFT(E.RECORD_NO,3) AS LINE,IF(E.DATE_DUE_LINE = '1900-1-1',NULL,E.DATE_DUE_LINE) AS DATE_DUE_LINE,D.AMT_COST,B.PCSTOPROD,B.PCSCOMPL,B.PCSREMAIN,IF(D.QTY_ONHAND IS NULL,'0.0000',D.QTY_ONHAND) AS QTY_ONHAND,IF(D.QTY_ONORDER_PO IS NULL,'0.0000',D.QTY_ONORDER_PO) AS QTY_ONORDER_PO,IF(D.QTY_ONORDER_WO IS NULL,'0.0000',D.QTY_ONORDER_WO) AS QTY_ONORDER_WO,IF(D.QTY_REQUIRED IS NULL,'0.0000',D.QTY_REQUIRED) AS QTY_REQUIRED FROM JOB_OPERATIONS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS LEFT JOIN JOB_HEADER C ON A.JOB = C.JOB AND A.SUFFIX = C.SUFFIX LEFT JOIN V_INVENTORY_MSTR D ON A.PART = D.PART AND C.LOCATION = D.LOCATION LEFT JOIN V_PO_LINES E ON A.JOB = E.JOB AND A.SUFFIX = E.SUFFIX AND A.SEQ = E.SEQUENCE WHERE A.LMO = 'M' AND A.SEQ NOT IN ('995000','998000') AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HEADER a where a.date_due between '{0}' and '{1}' {2}) ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.Local.sSQL)
+		F.Data.DataTable.CreateFromSQL("dtMatlTemp","con",v.Local.sSQL,True)
+		F.Data.DataTable.AddDisplayPartColumn("dtMatlTemp",0,"PART1","DISPLAY_PART1")
+		
+		f.Intrinsic.Control.If(v.screen.f_WOProjDash!chkHistory.checkedasboolean,=,True)
+			f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB AS JOB1,A.SUFFIX AS SFX1,A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,C.LOCATION AS LOCATION1,A.DESCRIPTION AS DESCR,E.VENDOR,E.PURCHASE_ORDER,E.LINE,IF(E.DATE_DUE_LINE = '1900-1-1',NULL,E.DATE_DUE_LINE) AS DATE_DUE_LINE,D.AMT_COST,B.PCSTOPROD,B.PCSCOMPL,B.PCSREMAIN,IF(D.QTY_ONHAND IS NULL,'0.0000',D.QTY_ONHAND) AS QTY_ONHAND,IF(D.QTY_ONORDER_PO IS NULL,'0.0000',D.QTY_ONORDER_PO) AS QTY_ONORDER_PO,IF(D.QTY_ONORDER_WO IS NULL,'0.0000',D.QTY_ONORDER_WO) AS QTY_ONORDER_WO,IF(D.QTY_REQUIRED IS NULL,'0.0000',D.QTY_REQUIRED) AS QTY_REQUIRED FROM V_JOB_HIST_OPS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS LEFT JOIN V_JOB_HIST_MAST C ON A.JOB = C.JOB AND A.SUFFIX = C.SUFFIX LEFT JOIN V_INVENTORY_MSTR D ON A.PART = D.PART AND C.LOCATION = D.LOCATION LEFT JOIN V_POHIST_LINES E ON A.JOB = E.JOB AND A.SUFFIX = E.SUFFIX AND A.SEQ = E.SEQUENCE WHERE A.LMO = 'M' AND A.SEQ NOT IN ('995000','998000') AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HIST_MAST a where a.date_due between '{0}' and '{1}' {2}) ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.Local.sSQL)
+			F.Data.DataTable.CreateFromSQL("dtMatlHistTemp","con",v.Local.sSQL,True)
+			
+			f.Data.DataTable.Merge("dtMatlHistTemp","dtMatlTemp",True,2)
+		f.Intrinsic.Control.EndIf
+		
+		f.Data.DataTable.DeleteRow("dtWOs$dtMatl")
+		f.Data.DataTable.AcceptChanges("dtWOs$dtMatl")
+		f.Data.DataTable.Merge("dtMatlTemp","dtWOs$dtMatl",True,2)
+		
+		f.Data.DataTable.DeleteRow("dtMatlOriginal")
+		f.Data.DataTable.DeleteRow("dtMatlWorking")
+		
+		'Load a datatable with the original data to be reloaded if the local subcomponent filter is blank
+		f.Data.DataTable.Merge("dtMatlTemp","dtMatlOriginal",True,2)
+		f.Data.DataTable.Merge("dtMatlTemp","dtMatlWorking",True,2)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.ReloadDTDVGVMatl.End
+
+Program.Sub.ReloadDTDVGVLbr.Start
+	f.Intrinsic.Control.Try
+		v.Local.sSQL.Declare(string)
+		
+		f.Intrinsic.Control.If(v.DataTable.dtLbrTemp.Exists)
+			f.Data.DataTable.Close("dtLbrTemp")
+		f.Intrinsic.Control.EndIf
+		
+		f.Intrinsic.Control.If(v.DataTable.dtLbrHistTemp.Exists)
+			f.Data.DataTable.Close("dtLbrHistTemp")
+		f.Intrinsic.Control.EndIf
+		
+		'Create temp table, delete rows out of original, merge the two
+		f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB,A.SUFFIX,A.SEQ,B.SEQRES,B.DESCR,B.STARTDATE,B.DUEDATE,B.COMPLDATE,A.CODE_SORT_OPER,B.OVERLAP,B.NOMACH,B.FLOAT,B.HOURSORIG AS EST_HRS,B.HOURSAPPL AS ACT_HRS,B.HOURSREM AS REM_HRS,B.PCSTOPROD AS ORDER_QTY,B.PCSCOMPL AS COMPL_QTY,B.PCSREMAIN AS PCS_REM FROM JOB_OPERATIONS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS WHERE A.LMO = 'L' AND A.SEQ NOT IN ('996000','998500') AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HEADER a WHERE a.date_due between '{0}' and '{1}' {2}) ORDER BY A.JOB,A.SUFFIX,A.SEQ;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.Local.ssql)
+		F.Data.DataTable.CreateFromSQL("dtLbrTemp","con",v.Local.sSQL,True)
+		
+		f.Intrinsic.Control.If(v.screen.f_WOProjDash!chkHistory.checkedasboolean,=,True)
+			f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB,A.SUFFIX,A.SEQ,B.SEQRES,B.DESCR,B.STARTDATE,B.DUEDATE,B.COMPLDATE,A.CODE_SORT_OPER,B.OVERLAP,B.NOMACH,B.FLOAT,B.HOURSORIG AS EST_HRS,B.HOURSAPPL AS ACT_HRS,B.HOURSREM AS REM_HRS,B.PCSTOPROD AS ORDER_QTY,B.PCSCOMPL AS COMPL_QTY,B.PCSREMAIN AS PCS_REM FROM V_JOB_HIST_OPS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS WHERE A.LMO = 'L' AND A.SEQ NOT IN ('996000','998500') AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HIST_MAST a WHERE a.date_due between '{0}' and '{1}' {2}) ORDER BY A.JOB,A.SUFFIX,A.SEQ;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.Local.ssql)
+			F.Data.DataTable.CreateFromSQL("dtLbrHistTemp","con",v.Local.sSQL,True)
+			
+			f.Data.DataTable.Merge("dtLbrHistTemp","dtLbrTemp",True,2)
+		f.Intrinsic.Control.EndIf
+		
+		f.Data.DataTable.DeleteRow("dtWOs$dtLbr")
+		f.Data.DataTable.AcceptChanges("dtWOs$dtLbr")
+		f.Data.DataTable.Merge("dtLbrTemp","dtWOs$dtLbr",True,2)
+		
+		f.Data.DataTable.DeleteRow("dtLbrOriginal")
+		f.Data.DataTable.DeleteRow("dtLbrWorking")
+		
+		'Load a datatable with the original data to be reloaded if the local subcomponent filter is blank
+		f.Data.DataTable.Merge("dtLbrTemp","dtLbrOriginal",True,2)
+		f.Data.DataTable.Merge("dtLbrTemp","dtLbrWorking",True,2)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.ReloadDTDVGVLbr.End
+
+Program.Sub.ReloadDTDVGVOut.Start
+	f.Intrinsic.Control.Try
+		'Create temp table, delete rows out of original, merge the two
+		v.Local.sSQL.Declare(string)
+	
+		f.Intrinsic.Control.If(v.DataTable.dtOutTemp.Exists)
+			f.Data.DataTable.Close("dtOutTemp")
+		f.Intrinsic.Control.EndIf
+		
+		f.Intrinsic.Control.If(v.DataTable.dtOutTemp.Exists)
+			f.Data.DataTable.Close("dtOutHistTemp")
+		f.Intrinsic.Control.EndIf
+		
+		f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB,A.SUFFIX,A.SEQ,C.NAME_VENDOR,B.DESCR,B.STARTDATE,B.DUEDATE,B.COMPLDATE,D.PURCHASE_ORDER AS PURCHASE_ORDER2,LEFT(D.RECORD_NO,3) AS LINE2 FROM JOB_OPERATIONS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS LEFT JOIN V_VENDOR_MASTER C ON B.OPCODE = C.VENDOR LEFT JOIN V_PO_LINES D ON A.JOB = D.JOB AND A.SUFFIX = D.SUFFIX AND A.SEQ = D.SEQUENCE WHERE A.LMO = 'O' AND A.SEQ <> '997000' AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HEADER a WHERE a.date_due between '{0}' and '{1}' {2}) ORDER BY A.JOB,A.SUFFIX,A.SEQ;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.Local.sSQL)
+		F.Data.DataTable.CreateFromSQL("dtOutTemp","con",v.Local.sSQL,True)
+		
+		f.Intrinsic.Control.If(v.screen.f_WOProjDash!chkHistory.checkedasboolean,=,True)
+			f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS,A.JOB,A.SUFFIX,A.SEQ,C.NAME_VENDOR,B.DESCR,B.STARTDATE,B.DUEDATE,B.COMPLDATE,D.PURCHASE_ORDER AS PURCHASE_ORDER2,D.LINE AS LINE2 FROM V_JOB_HIST_OPS A LEFT JOIN APSV3_JBLINES B ON JSS = B.JSS LEFT JOIN V_VENDOR_MASTER C ON B.OPCODE = C.VENDOR LEFT JOIN V_POHIST_LINES D ON A.JOB = D.JOB AND A.SUFFIX = D.SUFFIX AND A.SEQ = D.SEQUENCE WHERE A.LMO = 'O' AND A.SEQ <> '997000' AND JBSF IN (SELECT CONCAT(JOB,SUFFIX) AS JBSFX FROM V_JOB_HIST_MAST a WHERE a.date_due between '{0}' and '{1}' {2}) ORDER BY A.JOB,A.SUFFIX,A.SEQ;",v.Global.sFromDate,v.Global.sToDate,v.Global.sFilter,v.Local.sSQL)
+		F.Data.DataTable.CreateFromSQL("dtOutHistTemp","con",v.Local.sSQL,True)
+		f.Intrinsic.Control.EndIf
+		
+		f.Data.DataTable.DeleteRow("dtWOs$dtOut")
+		f.Data.DataTable.AcceptChanges("dtWOs$dtOut")
+		f.Data.DataTable.Merge("dtOutTemp","dtWOs$dtOut",True,2)
+		
+		f.Data.DataTable.DeleteRow("dtOutOriginal")
+		f.Data.DataTable.DeleteRow("dtOutWorking")
+		
+		'Load a datatable with the original data to be reloaded if the local subcomponent filter is blank
+		f.Data.DataTable.Merge("dtOutTemp","dtOutOriginal",True,2)
+		f.Data.DataTable.Merge("dtOutTemp","dtOutWorking",True,2)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.ReloadDTDVGVOut.End
+
+Program.Sub.LoadHistData.Start
+f.Intrinsic.Control.Try
+	v.Local.sSql.Declare
+	v.Local.sFilter.Declare
+	v.Local.dCutDate.Declare
+	v.Local.dFromDate.Declare
+	v.Local.dCutDate.Set(v.Screen.f_WOProjDash!dtpTo.value)
+	v.Local.dFromDate.Set(v.Screen.f_WOProjDash!dtpFrom.value)
+	v.Local.sHistorySQL.Declare(string,"")
+	
+	'Get the data from history, merge with the main
+	f.Intrinsic.Control.If(v.DataTable.dtWOHist.Exists)
+		f.Data.DataTable.Close("dtWOHist")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.Screen.f_WOProjDash!chkHistory.checkedasboolean,=,True)
+		f.Intrinsic.String.Build("SELECT '' AS Plus,CONVERT(CASE WHEN FLAG_WO_PRTD = 'Y' THEN 1 WHEN FLAG_WO_PRTD = 'X' THEN 0 WHEN FLAG_WO_PRTD = '' THEN 0 WHEN FLAG_WO_PRTD = 'R' THEN 1 END,SQL_BIT) AS PRINTED,CASE WHEN A.wo_rtr_released ='Y' THEN CONVERT(1,SQL_BIT) ELSE CONVERT (0, SQL_BIT) END AS RELEASED,A.JOB,A.SUFFIX,A.PROJECT,PHASE,D.DESCR,B.NAME_CUSTOMER,COALESCE(A.PART,'') AS PART,'' As DISPLAY_PART,LOCATION,PRODUCT_LINE,DESCRIPTION,E.TEXT as EXTRA_DESC,DATE_START,A.DATE_DUE,CONVERT(0,SQL_FLOAT) AS EST_HRS,NUM_HOURS AS ACT_HRS,CONVERT(0,SQL_FLOAT) AS REM_HRS,'' AS OPER,QTY_ORDER,QTY_ORDER - QTY_COMPLETED AS PCS_REM,C.NOTES,CONCAT(A.JOB,A.SUFFIX) AS JS,convert(0,sql_bit) AS IND_FLAG FROM v_job_hist_mast A LEFT JOIN V_CUSTOMER_MASTER B ON A.CUSTOMER = B.CUSTOMER LEFT JOIN GAB_4135_WO_NOTES C ON A.JOB = C.JOB AND A.SUFFIX = C.SUFFIX LEFT JOIN V_PROJECT_HISTORY D ON A.PROJECT = D.PROJECT LEFT JOIN V_INV_EXTRA_TEXT E ON A.PART=E.PART WHERE a.date_due between '{0}' and '{1}' AND JS NOT IN (SELECT CONCAT(JOB,SUFFIX) FROM V_JOB_HEADER)",V.Global.sFromDate,v.Global.sToDate,v.Local.sHistorySQL)
+		
+		f.Data.DataTable.CreateFromSQL("dtWOHist","con",v.Local.sHistorySQL)
+		f.Data.DataTable.Merge("dtWOHist","dtWOs",True,2)
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.ExitSub
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+
+Program.Sub.LoadHistData.End
+
+'-------------------------------------------------to do-----------------------------------
+Program.Sub.PrintPickList.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sName.Declare
+	V.Local.sValue.Declare
+
+	F.Intrinsic.Control.If(V.Screen.frmShip!ddlPicklistRpt.ItemData,=,0)
+		F.Intrinsic.String.ConcatCallWrapperArgs(V.Args.OrderNo,V.Args.OrderNo,"N","*!*ZDR*!*","*!*ZDR*!*","Y",V.Local.sValue)
+		F.Intrinsic.Control.If(V.Args.ShipSchd,=,"Ship Schd")
+			gui.frmShip.tabShip.Enabled(False)
+			F.Global.General.CallWrapperSync(910201,V.Local.sValue)
+			gui.frmShip.tabShip.Enabled(True)
+		F.Intrinsic.Control.Else
+			gui.frmShip.tabShip.Enabled(False)
+			F.Global.General.CallWrapperSync(910200,V.Local.sValue)
+			gui.frmShip.tabShip.Enabled(True)
+		F.Intrinsic.Control.EndIf
+		
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Split("OrderNo","*!*",V.Local.sName)
+		F.Intrinsic.String.Split(V.Args.OrderNo,"*!*",V.Local.sValue)
+		gui.frmShip.tabShip.Enabled(False)
+		F.Global.BI.PrintReport(95,0,V.Local.sName,V.Local.sValue,False)		
+		gui.frmShip.tabShip.Enabled(True)
+	F.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.PrintPickList.End
