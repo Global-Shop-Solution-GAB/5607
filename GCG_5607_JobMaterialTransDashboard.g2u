@@ -1,0 +1,1198 @@
+Program.Sub.ScreenSU.Start
+Gui.f_JobMaterialTrans..Create
+Gui.f_JobMaterialTrans..Caption("Job Material Transaction Summary Dashboard")
+Gui.f_JobMaterialTrans..Size(15360,10695)
+Gui.f_JobMaterialTrans..MinX(0)
+Gui.f_JobMaterialTrans..MinY(0)
+Gui.f_JobMaterialTrans..Position(0,0)
+Gui.f_JobMaterialTrans..BackColor(-2147483633)
+Gui.f_JobMaterialTrans..MousePointer(0)
+Gui.f_JobMaterialTrans..Event(Resize,f_JobMaterialTrans_Resize)
+Gui.f_JobMaterialTrans..Event(UnLoad,f_JobMaterialTrans_UnLoad)
+Gui.f_JobMaterialTrans.GsGcJobMaterial.Create(GsGridControl)
+Gui.f_JobMaterialTrans.GsGcJobMaterial.Size(15015,8925)
+Gui.f_JobMaterialTrans.GsGcJobMaterial.Position(75,1140)
+Gui.f_JobMaterialTrans.GsGcJobMaterial.Anchor(15)
+Gui.f_JobMaterialTrans.GsGcJobMaterial.Event(RowCellClick,GsGcJobMaterial_RowCellClick)
+Gui.f_JobMaterialTrans.GsGcJobMaterial.Event(CellValueChanged,GsGcJobMaterial_CellValueChanged)
+Gui.f_JobMaterialTrans.picGSSLogo.Create(PictureBox)
+Gui.f_JobMaterialTrans.picGSSLogo.Size(4125,960)
+Gui.f_JobMaterialTrans.picGSSLogo.Position(5550,90)
+Gui.f_JobMaterialTrans.progressBarStatus.Create(ProgressBar)
+Gui.f_JobMaterialTrans.progressBarStatus.Size(4110,255)
+Gui.f_JobMaterialTrans.progressBarStatus.Position(10770,570)
+Gui.f_JobMaterialTrans.progressBarStatus.Visible(False)
+Gui.f_JobMaterialTrans.progressBarStatus.Anchor(9)
+Gui.f_JobMaterialTrans.lblStatus.Create(Label,"****Change****",False,4110,255,0,10770,345,True,0,"Arial",10,-2147483633,0)
+Gui.f_JobMaterialTrans.lblStatus.Anchor(9)
+Gui.f_JobMaterialTrans.frmFilters.Create(Frame)
+Gui.f_JobMaterialTrans.frmFilters.Size(2445,960)
+Gui.f_JobMaterialTrans.frmFilters.Position(105,105)
+Gui.f_JobMaterialTrans.frmFilters.Caption("Filters")
+Gui.f_JobMaterialTrans.frmFilters.FontStyle(True,False,False,False,False)
+Gui.f_JobMaterialTrans.dtpFrom.Create(DatePicker)
+Gui.f_JobMaterialTrans.dtpFrom.Size(1485,285)
+Gui.f_JobMaterialTrans.dtpFrom.Position(810,210)
+Gui.f_JobMaterialTrans.dtpFrom.Parent("frmFilters")
+Gui.f_JobMaterialTrans.dtpTo.Create(DatePicker)
+Gui.f_JobMaterialTrans.dtpTo.Size(1485,285)
+Gui.f_JobMaterialTrans.dtpTo.Position(810,585)
+Gui.f_JobMaterialTrans.dtpTo.Parent("frmFilters")
+Gui.f_JobMaterialTrans.lbl1.Create(Label,"From:",True,525,255,0,225,285,True,0,"Arial",8,-2147483633,0)
+Gui.f_JobMaterialTrans.lbl1.Parent("frmFilters")
+Gui.f_JobMaterialTrans.lbl2.Create(Label,"To:",True,330,255,0,390,660,True,0,"Arial",8,-2147483633,0)
+Gui.f_JobMaterialTrans.lbl2.Parent("frmFilters")
+Gui.f_JobMaterialTrans.cmdRefresh.Create(Button)
+Gui.f_JobMaterialTrans.cmdRefresh.Size(540,375)
+Gui.f_JobMaterialTrans.cmdRefresh.Position(2625,420)
+Gui.f_JobMaterialTrans.cmdRefresh.Caption("REFRESH")
+Gui.f_JobMaterialTrans.cmdRefresh.Event(Click,cmdRefresh_Click)
+Gui.f_JobMaterialTrans.GsGcJobMaterial.Event(mousecellenter,mouseCellEnter)
+Gui.f_SelectScreen..Create
+Gui.f_SelectScreen..Caption("Select Screen")
+Gui.f_SelectScreen..Size(3120,2760)
+Gui.f_SelectScreen..MinX(0)
+Gui.f_SelectScreen..MinY(0)
+Gui.f_SelectScreen..Position(0,0)
+Gui.f_SelectScreen..BackColor(-2147483633)
+Gui.f_SelectScreen..MaxButton(False)
+Gui.f_SelectScreen..MinButton(False)
+Gui.f_SelectScreen..MousePointer(0)
+Gui.f_SelectScreen..Sizeable(False)
+Gui.f_SelectScreen..Event(UnLoad,f_SelectScreen_UnLoad)
+Gui.f_SelectScreen.lbl1.Create(Label,"Select screen to open:",True,2640,255,0,180,315,True,0,"Arial",8,-2147483633,0)
+Gui.f_SelectScreen.lbl1.FontStyle(True,False,False,False,False)
+Gui.f_SelectScreen.optWO.Create(Option)
+Gui.f_SelectScreen.optWO.Size(1905,255)
+Gui.f_SelectScreen.optWO.Position(210,555)
+Gui.f_SelectScreen.optWO.Caption("Work Order (Open)")
+Gui.f_SelectScreen.optBOM.Create(Option)
+Gui.f_SelectScreen.optBOM.Size(1935,255)
+Gui.f_SelectScreen.optBOM.Position(210,900)
+Gui.f_SelectScreen.optBOM.Caption("BOM Maintenance")
+Gui.f_SelectScreen.cmdSubmit.Create(Button)
+Gui.f_SelectScreen.cmdSubmit.Size(855,375)
+Gui.f_SelectScreen.cmdSubmit.Position(705,1305)
+Gui.f_SelectScreen.cmdSubmit.Caption("OK")
+Gui.f_SelectScreen.cmdSubmit.Event(Click,cmdSubmit_Click)
+Gui.f_SelectScreen.lblWO.Create(Label,"Label",False,1935,255,0,1830,1410,True,0,"Arial",8,-2147483633,0)
+Gui.f_SelectScreen.lblSuffix.Create(Label,"Label",False,1935,255,0,1860,1680,True,0,"Arial",8,-2147483633,0)
+Gui.f_SelectScreen.lblPart.Create(Label,"Label",False,1935,255,0,1830,1980,True,0,"Arial",8,-2147483633,0)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+	V.Global.bLoadData.Declare(boolean)
+	v.Global.sFromDate.Declare(string)
+	v.Global.sToDate.Declare(string)
+	v.Global.sFilter.Declare(string)
+	V.Global.sSelectedGrid.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'	Author: Daniel Duncan
+'	Customer: Haskris
+'	Program Name: Job Material Transaction Summary Dashboard
+'	Date Started: 7/19/2019
+'	Description: This dashboard gives the user the ability to view the materials issued against each job.  Customer will use this to identify jobs that have miscellaneous material issued and then audit what changes may need to be made to the BOM for future orders. 
+'	Quote: 11522 - 0
+'	GAP: 5607
+	f.Intrinsic.Control.Try
+		v.Local.dBegDate.Declare(Date)
+		f.ODBC.Connection!con.OpenCompanyConnection(10000000)
+		f.Intrinsic.Control.CallSub(loadPictureLogo)
+		f.Intrinsic.Control.CallSub(CheckTable)
+		f.Intrinsic.Date.DateAdd("d",-7,v.Ambient.Date,v.Local.dBegDate)
+		gui.f_JobMaterialTrans.dtpFrom.Value(v.Local.dBegDate)
+		gui.f_JobMaterialTrans..Show
+		f.Intrinsic.Control.CallSub(LoadGrid)
+		f.Intrinsic.Control.CallSub(LoadDTDVGVMatl)
+		f.Intrinsic.Control.CallSub(FormatGrid)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+'--------FORM EVENTS-------
+Program.Sub.f_JobMaterialTrans_UnLoad.Start
+	F.Intrinsic.Control.Try
+		V.Local.sError.Declare
+		
+'		F.Intrinsic.Control.If(V.Global.bLoadData)
+'			'F.Intrinsic.Control.CallSub(Serialize)
+'		F.Intrinsic.Control.EndIf
+		
+		f.Intrinsic.Control.If(v.ODBC!con.State, =, 1)
+			f.ODBC.Connection!con.Close
+		f.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.End
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.f_JobMaterialTrans_UnLoad.End
+
+Program.Sub.f_JobMaterialTrans_Resize.Start
+	F.Intrinsic.Control.Try
+		V.Local.sError.Declare
+		V.Local.iX.Declare
+		
+		F.Intrinsic.Math.Div(V.Screen.f_JobMaterialTrans.Width,2,V.Local.iX)
+		F.Intrinsic.Math.Sub(V.Local.iX,2000,V.Local.iX)
+		Gui.f_JobMaterialTrans.picGSSLogo.Position(V.Local.iX,45)
+	
+		'Let Form grow larger than 15375, but not lower
+		F.Intrinsic.Control.If(V.Screen.f_JobMaterialTrans.Width,<,15375)
+			Gui.f_JobMaterialTrans..Size(15375,V.Screen.f_JobMaterialTrans.Height)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.f_JobMaterialTrans_Resize.End
+
+Program.Sub.GsGcJobMaterial_CellValueChanged.Start
+	F.Intrinsic.Control.Try
+	
+	f.Intrinsic.Control.selectCase(v.Args.column)
+		f.Intrinsic.Control.Caseany("NOTES","REVIEWED")
+			f.Intrinsic.control.callsub(SaveCustomCols,"RowInd",v.Args.RowIndex,"Col",v.Args.Column,"GV","gvWOs")
+		f.Intrinsic.Control.caseany("Notes1","Reviewed1","EngReviewed1","JobChange")
+			f.Intrinsic.control.callsub(SaveCustomCols,"RowInd",v.Args.RowIndex,"Col",v.Args.Column,"GV","gvMatl")
+	f.Intrinsic.Control.EndSelect
+'		F.Intrinsic.Control.If(V.Args.COLUMN,=,"NOTES")
+'			f.Intrinsic.control.callsub(SaveCustomCols,"RowInd",v.Args.RowIndex,"Col",v.Args.Column)
+'		F.Intrinsic.Control.elseIf(V.Args.COLUMN,=,"REVIEWED")
+'			f.Intrinsic.control.callsub(SaveCustomCols,"RowInd",v.Args.RowIndex,"Col",v.Args.Column)
+'		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.GsGcJobMaterial_CellValueChanged.End
+
+Program.Sub.GsGcJobMaterial_RowCellClick.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare	
+	V.Local.sParams.Declare(String)
+	V.Local.sJob.Declare(String)
+	V.Local.sSuffix.Declare(String)
+	V.Local.sPart.Declare(String)
+	V.Local.sLoc.Declare(String)
+	V.Local.sPO.Declare(String)
+	V.Local.sSQL.Declare(String)
+	V.Local.sRet.Declare(String)
+	V.Local.sParent.Declare(string)
+	V.Local.sParentSuf.Declare(string)
+	V.Local.bEdit.Declare
+	
+	F.Intrinsic.Control.SelectCase(V.Args.COLUMN)
+		F.Intrinsic.Control.CaseAny("JOB","SUFFIX")
+			F.Intrinsic.Control.CallSub(lockscreen)
+			'Edit (DD - 10/28/19): Open WO in edit or view based on user security
+			'New WO
+			F.Global.Security.CheckUserAccessIPM(527,1,V.Local.bEdit)
+			F.Intrinsic.Control.If(V.Local.bEdit,=,False)
+				'Open WO
+				F.Global.Security.CheckUserAccessIPM(527,2,V.Local.bEdit)
+			F.Intrinsic.Control.EndIf
+		
+'			F.Intrinsic.Control.If(V.Local.bEdit,=,True)
+'				Gui.f_WOProjDash.optEdit.Enabled(True)
+'			F.Intrinsic.Control.EndIf
+
+			
+			
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","JOB",V.Args.RowIndex,V.Local.sJob)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","SUFFIX",V.Args.RowIndex,V.Local.sSuffix)
+			f.Intrinsic.Control.If(v.Local.bEdit,=,False)
+				F.Intrinsic.String.Build("7!*!{0}!*!{1}!*!A",V.Local.sJob,V.Local.sSuffix,V.Local.sParams)
+				F.Global.General.CallWrapperSync(450000,V.Local.sParams)
+			f.Intrinsic.Control.Else
+				F.Intrinsic.String.Build("{0}!*!{1}!*!O",V.Local.sJob,V.Local.sSuffix,V.Local.sParams)
+				F.Global.General.CallWrapperSync(2009,V.Local.sParams)
+			f.Intrinsic.Control.EndIf
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.Enabled(True)
+			F.Intrinsic.Control.CallSub(enablescreen)
+			F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.CaseAny("PART")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs",V.ARGS.COLUMN,V.Args.RowIndex,V.Local.sPart)
+			'Edit (DD - 10/28/19):Check user security to S&D w/ Edit (menu key 371).  If false, open general S&D.
+			F.Global.Security.CheckUserAccessIPM(371,1,V.Local.bEdit)
+			f.Intrinsic.Control.If(v.Local.bEdit)
+				F.Intrinsic.String.Build("{0}!*!{1}!*!M",V.Local.sPart,"",V.Local.sParams)
+			f.Intrinsic.Control.Else
+				F.Intrinsic.String.Build("{0}!*!{1}!*!O",V.Local.sPart,"",V.Local.sParams)
+			f.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.Control.CallSub(lockscreen)
+			F.Global.General.CallWrapperSync(300011,V.Local.sParams)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.Enabled(True)
+			F.Intrinsic.Control.CallSub(enablescreen)
+			F.Intrinsic.Control.ExitSub
+		F.Intrinsic.Control.CaseAny("DISPLAY_PART1")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName(V.Global.sSelectedGrid,"DISPLAY_PART1",V.Args.RowIndex,V.Local.sPart)
+			F.Global.Security.CheckUserAccessIPM(371,1,V.Local.bEdit)
+			f.Intrinsic.Control.If(v.Local.bEdit)
+				F.Intrinsic.String.Build("{0}!*!{1}!*!M",V.Local.sPart,"",V.Local.sParams)
+			f.Intrinsic.Control.Else
+				F.Intrinsic.String.Build("{0}!*!{1}!*!O",V.Local.sPart,"",V.Local.sParams)
+			f.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.String.Build("{0}!*!{1}!*!M",V.Local.sPart,"",V.Local.sParams)
+			F.Intrinsic.Control.CallSub(lockscreen)
+			F.Global.General.CallWrapperSync(300011,V.Local.sParams)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.Enabled(True)
+			F.Intrinsic.Control.CallSub(enablescreen)
+			F.Intrinsic.Control.ExitSub			
+		f.Intrinsic.Control.Case("PARENT_WO","PARENT_SUFFIX")
+			'Edit (DD - 10/28/19): Let user choose whether to open BOM Maintenance or WO Open
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","PARENT_WO",V.Args.RowIndex,V.Local.sParent)
+			gui.f_SelectScreen.lblWO.text(V.Local.sParent)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","PARENT_SUFFIX",V.Args.RowIndex,V.Local.sParent)
+			gui.f_SelectScreen.lblSuffix.text(V.Local.sParent)
+			
+			GUI.f_SelectScreen..Show
+			
+'			F.Intrinsic.Control.CallSub(lockscreen)
+'			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","PARENT_Part",V.Args.RowIndex,V.Local.sParent)
+'			F.Global.Callwrapper.New("5607","Manufacturing.BOM.OpenBOMMaintenance")
+'			F.Global.Callwrapper.SetProperty("5607","Parent",v.Local.sParent)
+'			F.Global.CallWrapper.Run("5607")
+'			F.Intrinsic.Control.CallSub(enablescreen)
+'			F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine) 
+	F.Intrinsic.Control.EndTry
+Program.Sub.GsGcJobMaterial_RowCellClick.End
+
+Program.Sub.cmdRefresh_Click.Start
+	f.Intrinsic.Control.Try
+		F.Intrinsic.Control.If(V.Global.bLoadData)
+			F.Intrinsic.Control.CallSub(Serialize)
+		F.Intrinsic.Control.EndIf
+		
+'		Gui.f_JobMaterialTrans.GsGcJobMaterial.ClearRows("gvMatl")
+'		Gui.f_JobMaterialTrans.GsGcJobMaterial.ClearRows("gvWOs")
+		F.Intrinsic.Control.BlockEvents
+		f.Intrinsic.Control.CallSub(LockScreen)
+		f.Intrinsic.Control.CallSub(ReloadGrid)
+		f.Intrinsic.Control.CallSub(ReloadDTDVGVMatl)
+		f.Intrinsic.Control.CallSub(EnableScreen)
+		F.Intrinsic.Control.UnBlockEvents
+		F.Intrinsic.Control.CallSub(Deserialize)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.cmdRefresh_Click.End
+
+Program.Sub.cmdSubmit_Click.Start
+	f.Intrinsic.Control.Try
+		v.Local.bEdit.Declare(boolean)
+		V.Local.sJob.declare(string)
+		V.Local.sSuffix.Declare(string)
+		V.Local.sPart.Declare(string)
+		V.Local.sParams.Declare(string)
+		
+		'Launch either BOM Maint or WO Open
+		f.Intrinsic.Control.If(v.Screen.f_SelectScreen!optBOM.Value,=,True)
+			F.Intrinsic.Control.CallSub(lockscreen)
+			v.Local.sPart.Set(v.Screen.f_SelectScreen!lblPart.text)
+'			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","PARENT_Part",V.Args.RowIndex,V.Local.sParent)
+			F.Global.Callwrapper.New("5607","Manufacturing.BOM.OpenBOMMaintenance")
+			F.Global.Callwrapper.SetProperty("5607","Parent",v.Local.sPart)
+			F.Global.CallWrapper.Run("5607")
+		f.Intrinsic.Control.Else
+			F.Intrinsic.Control.CallSub(lockscreen)
+			'Edit (DD - 10/28/19): Open WO in edit or view based on user security
+			'New WO
+			F.Global.Security.CheckUserAccessIPM(527,1,V.Local.bEdit)
+			F.Intrinsic.Control.If(V.Local.bEdit,=,False)
+				'Open WO
+				F.Global.Security.CheckUserAccessIPM(527,2,V.Local.bEdit)
+			F.Intrinsic.Control.EndIf
+		
+'			F.Intrinsic.Control.If(V.Local.bEdit,=,True)
+'				Gui.f_WOProjDash.optEdit.Enabled(True)
+'			F.Intrinsic.Control.EndIf
+			
+			v.Local.sjob.Set(v.Screen.f_SelectScreen!lblWO.text)
+			v.Local.sSuffix.Set(v.Screen.f_SelectScreen!lblSuffix.text)
+			
+'			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","JOB",V.Args.RowIndex,V.Local.sJob)
+'			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","SUFFIX",V.Args.RowIndex,V.Local.sSuffix)
+			f.Intrinsic.Control.If(v.Local.bEdit,=,False)
+				F.Intrinsic.String.Build("7!*!{0}!*!{1}!*!A",V.Local.sJob,V.Local.sSuffix,V.Local.sParams)
+				F.Global.General.CallWrapperSync(450000,V.Local.sParams)
+			f.Intrinsic.Control.Else
+				F.Intrinsic.String.Build("{0}!*!{1}!*!O",V.Local.sJob,V.Local.sSuffix,V.Local.sParams)
+				F.Global.General.CallWrapperSync(2009,V.Local.sParams)
+			f.Intrinsic.Control.EndIf
+		f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.Finally
+		f.Intrinsic.Control.CallSub(f_SelectScreen_UnLoad)
+	f.Intrinsic.Control.EndTry
+Program.Sub.cmdSubmit_Click.End
+
+Program.Sub.f_SelectScreen_UnLoad.Start
+	GUI.f_SelectScreen..Visible(False)
+	Gui.f_JobMaterialTrans.GsGcJobMaterial.Enabled(True)
+	F.Intrinsic.Control.CallSub(enablescreen)
+Program.Sub.f_SelectScreen_UnLoad.End
+
+'--------DATA MOVEMENT-------
+Program.Sub.ErrorMsg.Start
+v.Local.sError.Declare
+
+'Closes ODBC connection, default to connection : "con"
+f.Intrinsic.Control.If(v.ODBC!con.State, =, 1)
+	f.ODBC.Connection!con.Close
+f.Intrinsic.Control.EndIf
+
+'Generic Error message.
+f.Intrinsic.String.Build("Project GCG_5607_JobMaterialTransDashboard.g2u {0}{0}Subroutine: {1}{0}Error: {2} with Description: {3}", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+f.Intrinsic.UI.Msgbox(v.Local.sError)
+Program.Sub.ErrorMsg.End
+
+Program.Sub.LoadGrid.Start
+'BM 3/4/20 Updated Logic in sql statement to check delta column by checking if matl issued = matl est, returning 0 if it is, and doing a subtraction if so. Avoids error w highlighting green if parts happen to net to 0
+	f.Intrinsic.Control.Try
+		V.Local.sError.Declare
+	
+		V.Local.iCnt.Declare(Long)
+		V.Local.iProgress.Declare(Long)
+		V.Local.sSQL.Declare(String)
+		V.Local.sRet.Declare(String)
+		V.Local.sJob.Declare(String)
+		V.Local.sSuffix.Declare(String)
+		V.Local.fEstHrs.Declare(Float)
+		V.Local.fRemHrs.Declare(Float)
+		V.Local.fPcsRem.Declare(Float)
+		V.Local.sOper.Declare(String)
+		V.Local.bDictExists.Declare
+		
+		Gui.f_JobMaterialTrans.lblStatus.Visible(True)
+		Gui.f_JobMaterialTrans.progressBarStatus.Visible(True)
+		Gui.f_JobMaterialTrans.lblStatus.Caption("Loading Work Orders....")
+		Gui.f_JobMaterialTrans.progressBarStatus.Min(0)
+		Gui.f_JobMaterialTrans.progressBarStatus.Max(100)
+		
+		F.Intrinsic.Control.If(V.DataTable.dtWOs.Exists,=,True)
+			F.Data.DataTable.Close("dtWOs")
+		F.Intrinsic.Control.EndIf
+		
+'		F.Intrinsic.Control.If(V.DataTable.dtTotalMisc.Exists,=,True)
+'			F.Data.DataTable.Close("dtTotalMisc")
+'		F.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.If(V.DataTable.dtRet.Exists,=,True)
+			F.Data.DataTable.Close("dtRet")
+		F.Intrinsic.Control.EndIf
+	
+		F.Data.Dictionary.Exists("dIndirect",V.Local.bDictExists)
+		F.Intrinsic.Control.If(V.Local.bDictExists,=,True)
+			F.Data.Dictionary.Close("dIndirect")
+		F.Intrinsic.Control.EndIf
+		
+		V.Global.bLoadData.Set(True)
+		
+		f.Intrinsic.String.format(v.Screen.f_JobMaterialTrans!dtpFrom.Value,"yyyy-MM-DD",v.Global.sFromDate)
+		f.Intrinsic.String.format(v.Screen.f_JobMaterialTrans!dtpTo.Value,"yyyy-MM-DD",v.Global.sToDate)
+		
+		
+		F.Data.Dictionary.CreateFromSQL("dIndirect","con","SELECT DISTINCT CONCAT(JOB,SUFFIX) AS JS,CONVERT(IF('' = '',1,0),SQL_BIT) FROM IND_LBR_ACCTS;")
+		F.Data.Dictionary.SetDefaultReturn("dIndirect",False)
+		
+		f.Intrinsic.String.Build("SELECT '' as PLUS,convert(isnull(d.REVIEWED,0),sql_bit) as Reviewed,A.DATE_DUE,A.JOB,A.SUFFIX,A.PART,A.DESCRIPTION,a.product_line,if(a.PARENT_WO='','',a.PARENT_WO) as PARENT_WO,IF(a.parent_WO='','',a.parent_suffix_parent) as PARENT_SUFFIX, CONCAT(A.JOB,A.SUFFIX) AS JS, CONVERT(0,SQL_BIT) AS IND_FLAG,  D.NOTES FROM V_JOB_HEADER A left join GCG_5607_REVNOTES d on a.job=d.job and a.suffix=d.suffix where a.date_due between '{0}' and '{1}' ORDER BY A.DATE_DUE,A.JOB,A.SUFFIX;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSQL)
+
+		F.Data.DataTable.CreateFromSQL("dtRet","con",v.Local.sSQL,True)
+		
+'		f.Data.datatable.CreateFromSQL("dtTotalMisc","con","SELECT JOB, SUFFIX, SUM(HOURS_ACTUAL) AS TOT_MISCISSUES FROM V_JOB_OPERATIONS WHERE SEQ = 995000 GROUP BY JOB, SUFFIX;",True)
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(15)
+		
+'		f.Data.Linq.Join("innerjoin","datatable","dtWOs*!*M","datatable","dtTotalMisc*!*S","M.Job=S.Job AND M.Suffix=S.Suffix","M.PLUS*!*M.REVIEWED*!*M.DATE_DUE*!*M.JOB*!*M.SUFFIX*!*M.PART*!*M.DESCRIPTION*!*M.PARENT_WO*!*M.PARENT_SUFFIX*!*M.PARENT_PART*!*M.PARENT_DESCRIPTION*!*M.TOT_MATERIALISSUES*!*M.TOT_ESTMATERIAL*!*M.DELTA*!*M.JS*!*M.IND_FLAG*!*S.TOT_MISCISSUES*!*M.NOTES","","","","dtRet",True)
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(25)
+		
+		F.Data.DataTable.FillFromDictionary("dtRet","dIndirect","JS","IND_FLAG")
+		
+		'Remove indirect Jobs
+		F.Data.DataView.Create("dtRet","dvWOs",22,"IND_FLAG <> True","DATE_DUE ASC,JOB ASC,SUFFIX ASC")
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(35)	
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+		f.Intrinsic.Control.End
+	f.Intrinsic.Control.EndTry
+		
+Program.Sub.LoadGrid.End
+
+Program.Sub.LoadDTDVGVMatl.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	v.Local.sSql.Declare(string)
+	V.Local.iRet.Declare
+	V.Local.iCnt.Declare	
+
+	'Query pulls all standard job sequences and only pulls the misc material and rework material sequences if they have material applied
+	'Edit (DD - 10/23/19) - Added columns for qty issued, date/time issued, reviewed, and notes
+	'Edit ()DD - 1/7/20) - Remove QtyIssued and DateIssued columns per customer's request
+	'Edit (BM- 3/4/20)- Reversed how units delta is calculated ie Units act - units est. per customer's request
+'	f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as NEXT_WC, '' as PL,A.DOLLARS_ESTIMATED, A.DOLLARS_ACTUAL, A.DOLLARS_ESTIMATED-A.DOLLARS_ACTUAL as DOLLARS_DELTA, A.HOURS_ESTIMATED, A.HOURS_ACTUAL, A.HOURS_ESTIMATED-A.HOURS_ACTUAL AS HOURS_DELTA, convert(0.00, sql_float) as QtyIssued, convert('1900-01-01',sql_date) as DateIssued, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, '' as DTLSeq FROM V_JOB_OPERATIONS A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where A.date_due between '{0}' and '{1}') AND SEQ1 < 995000 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)
+	f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,ltrim(rtrim(CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ))) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as PL, A.HOURS_ESTIMATED, A.HOURS_ACTUAL, A.HOURS_ACTUAL-A.HOURS_ESTIMATED AS HOURS_DELTA, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, '' as DTLSeq FROM V_JOB_OPERATIONS A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where A.date_due between '{0}' and '{1}') AND SEQ1 < 995000 AND A.HOURS_ACTUAL-A.HOURS_ESTIMATED <> 0 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)
+	
+	F.Data.DataTable.CreateFromSQL("dtRet$dtMatl","con",v.Local.sSql,True)
+	F.Data.DataTable.AddDisplayPartColumn("dtRet$dtMatl",0,"PART1","DISPLAY_PART1")
+	F.Data.DataView.Create("dtRet$dtMatl","dvMatl")
+	F.Data.DataTable.AddRelation("dtRet","JS","dtRet$dtMatl","JBSF","Discrepancies")
+	
+	f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,ltrim(rtrim(CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ))) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as PL, A.HOURS_ESTIMATED, A.HOURS_ACTUAL, A.HOURS_ACTUAL-A.HOURS_ESTIMATED AS HOURS_DELTA, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, '' as DTLSeq FROM V_JOB_OPERATIONS A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where A.date_due between '{0}' and '{1}') AND SEQ1 < 995000 AND A.HOURS_ACTUAL-A.HOURS_ESTIMATED = 0 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)
+	
+	F.Data.DataTable.CreateFromSQL("dtRet$dtMatl2","con",v.Local.sSql,True)
+	F.Data.DataTable.AddDisplayPartColumn("dtRet$dtMatl2",0,"PART1","DISPLAY_PART1")
+	F.Data.DataView.Create("dtRet$dtMatl2","dvMatl2")
+	F.Data.DataTable.AddRelation("dtRet","JS","dtRet$dtMatl2","JBSF","Targets")
+	
+	'Fill in Qty Issued and Date/Time Issued column.  For regular sequences, this should be the last qty and date charged.  For misc, it should be the qty and date of the record.
+	'--Get the top record for each open job
+'	f.data.DataTable.CreateFromSQL("dtTopRecords","con","select distinct concat(concat(job,suffix),seq) as JSS, concat(concat(job,suffix),seq) + max(concat(date_sequence_uf,sequence_key)) as SeqKey, convert(0, sql_float) as QtyIssued, convert('1900-01-01',sql_date) as DateIssued from v_job_detail where seq < '995000' and lmo='M' group by job, suffix, seq;")
+'	'--Get the detail records for jobs, including the qty issued and date it was issued on, fill the qty issued and date issued
+'	f.data.dictionary.CreateFromSQL("dictIssues","con","select concat(concat(job,suffix),seq) + max(concat(date_sequence_uf,sequence_key)), hours_worked from v_job_detail where seq < '995000' and lmo='M' group by job, suffix, seq, hours_worked;")
+'	f.data.dictionary.CreateFromSQL("dictDateIssued","con","select concat(concat(job,suffix),seq) + max(concat(date_sequence_uf,sequence_key)), charge_date from v_job_detail where seq < '995000' and lmo='M' group by job, suffix, seq, charge_date;")
+'	f.Data.Dictionary.SetDefaultReturn("dictIssues",0)
+'	f.Data.Dictionary.SetDefaultReturn("dictDateIssued","1900-01-01")
+'	f.Data.DataTable.FillFromDictionary("dtTopRecords","dictIssues","SeqKey","QtyIssued")
+'	f.Data.DataTable.FillFromDictionary("dtTopRecords","dictDateIssued","SeqKey","DateIssued")
+'	f.Data.Dictionary.Close("dictIssues")
+'	f.Data.Dictionary.Close("dictDateIssued")
+	
+	'Create dictionaries from dtTopRecords to fill in the qty and date for last issue transactions
+'	f.Data.Dictionary.CreateFromDatatable("dictIssues","dtTopRecords","JSS","QtyIssued")
+'	f.Data.Dictionary.CreateFromDatatable("dictDateIssued","dtTopRecords","JSS","DateIssued")
+'	f.Data.Dictionary.SetDefaultReturn("dictIssues",0)
+'	f.Data.Dictionary.SetDefaultReturn("dictDateIssued","1900-01-01")
+'	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl","dictIssues","JSS","QtyIssued")
+'	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl","dictDateIssued","JSS","DateIssued")
+'	f.Data.Dictionary.Close("dictIssues")
+'	f.Data.Dictionary.Close("dictDateIssued")
+	
+	'Get lines for misc material seqs from job detail, merge into master detail DT
+'	f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as NEXT_WC, '' as PL,convert(0,sql_float) as DOLLARS_ESTIMATED, a.amount_labor as DOLLARS_ACTUAL, convert(0,sql_float)-a.amount_labor AS DOLLARS_DELTA, convert(0,sql_float) as HOURS_ESTIMATED, A.HOURS_WORKED AS HOURS_ACTUAL, convert(0,sql_float)-A.HOURS_WORKED AS HOURS_DELTA, A.HOURS_WORKED as QtyIssued, A.CHARGE_DATE as DateIssued, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, CONCAT(DATE_SEQUENCE_UF,SEQUENCE_KEY) as DTLSeq FROM V_JOB_DETAIL A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where A.date_due between '{0}' and '{1}') AND SEQ1 >= 995000 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)
+	f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,ltrim(rtrim(CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ))) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as PL, convert(0,sql_float) as HOURS_ESTIMATED, A.HOURS_WORKED AS HOURS_ACTUAL, A.HOURS_WORKED-convert(0,sql_float) AS HOURS_DELTA, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, ltrim(rtrim(CONCAT(DATE_SEQUENCE_UF,SEQUENCE_KEY))) as DTLSeq FROM V_JOB_DETAIL A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where a.date_due between '{0}' and '{1}') AND SEQ1 >= 995000 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)
+	F.Data.DataTable.CreateFromSQL("dtMiscSeqs","con",v.Local.sSql)
+	F.Data.DataTable.AddDisplayPartColumn("dtMiscSeqs",0,"PART1","DISPLAY_PART1")
+	f.Data.DataTable.Merge("dtMiscSeqs","dtRet$dtMatl",False,2)
+	f.Data.DataTable.Close("dtMiscSeqs")
+	
+	F.Data.DataTable.AcceptChanges("dtRet$dtMatl")
+	
+	f.Data.DataTable.AddExpressionColumn("dtRet$dtMatl","JSS_DTLSEQ","string","JSS+DTLSeq")
+	f.Data.DataTable.AddExpressionColumn("dtRet$dtMatl2","JSS_DTLSEQ","string","JSS+DTLSeq")
+	'Fill in reviewed and notes at detail level
+	f.Data.Dictionary.CreateFromSQL("dictDtlReviewed","con","select ltrim(rtrim(JSS_DTLSEQ)) as JSS_DTLSEQ, REVIEWED FROM GCG_5607_DTLNOTES;")
+	f.Data.Dictionary.CreateFromSQL("dictDtlNotes","con","select ltrim(rtrim(JSS_DTLSEQ)) as JSS_DTLSEQ, NOTES FROM GCG_5607_DTLNOTES;")
+	f.Data.Dictionary.CreateFromSQL("dictDtlEngChange","con","select ltrim(rtrim(JSS_DTLSEQ)) as JSS_DTLSEQ, ltrim(rtrim(ENG_CHANGE)) as ENG_CHANGE FROM GCG_5607_DTLNOTES;")
+	f.Data.Dictionary.CreateFromSQL("dictDtlEngReviewed","con","select ltrim(rtrim(JSS_DTLSEQ)) as JSS_DTLSEQ, ENG_REVIEWED FROM GCG_5607_DTLNOTES;")
+	f.Data.Dictionary.SetDefaultReturn("dictDtlReviewed",False)
+	f.Data.Dictionary.SetDefaultReturn("dictDtlNotes","")
+	f.Data.Dictionary.SetDefaultReturn("dictDtlEngReviewed",False)
+	f.Data.Dictionary.SetDefaultReturn("dictDtlEngChange","")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl","dictDtlReviewed","JSS_DTLSEQ","Reviewed1")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl","dictDtlNotes","JSS_DTLSEQ","Notes1")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl","dictDtlEngChange","JSS_DTLSEQ","JobChange")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl","dictDtlEngReviewed","JSS_DTLSEQ","EngReviewed1")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl2","dictDtlReviewed","JSS_DTLSEQ","Reviewed1")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl2","dictDtlNotes","JSS_DTLSEQ","Notes1")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl2","dictDtlEngChange","JSS_DTLSEQ","JobChange")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl2","dictDtlEngReviewed","JSS_DTLSEQ","EngReviewed1")
+	f.Data.Dictionary.Close("dictDtlReviewed")
+	f.Data.Dictionary.Close("dictDtlNotes")	
+	f.Data.Dictionary.Close("dictDtlEngChange")	
+	f.Data.Dictionary.Close("dictDtlEngReviewed")	
+'	f.Data.DataTable.Close("dtTopRecords")
+	
+	F.Data.DataTable.AcceptChanges("dtRet$dtMatl")
+	F.Data.DataTable.AcceptChanges("dtRet$dtMatl2")
+	
+	
+	'Create dict for PL
+	f.Data.Dictionary.CreateFromSQL("dictPL","con","select part, product_line from v_inventory_all;")
+	f.Data.Dictionary.SetDefaultReturn("dictPL","")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl","dictPL","Part1","PL")
+	f.Data.DataTable.FillFromDictionary("dtRet$dtMatl2","dictPL","Part1","PL")
+	f.Data.Dictionary.Close("dictPL")
+	
+	Gui.f_JobMaterialTrans.progressBarStatus.Value(80)
+
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.LoadDTDVGVMatl.End
+
+Program.Sub.FormatGrid.Start
+	f.Intrinsic.Control.Try
+		V.Local.iCnt.Declare
+		V.Local.iRet.Declare
+		v.Local.sGVName.Declare(string)
+		
+		gui.f_JobMaterialTrans.GsGcJobMaterial.AddGridViewFromDataView("gvWOs","dtRet","dvWOs")		
+			
+		gui.f_JobMaterialTrans.GsGcJobMaterial.SuspendLayout()	
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(50)
+		
+		gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridviewProperty("gvWOs","OptionsViewColumnAutoWidth",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty("gvWOs","MultiSelect",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty("gvWOs","AllowSort",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty("gvWOs","AllowFilter",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty("gvWOs","OptionsDetailShowDetailTabs",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty("gvWOs","OptionsViewShowGroupPanel",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty("gvWOs","EnableAppearanceOddRow",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty("gvWOs","OptionsMenuShowAutoFilterRowItem",True)
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JS","Visible",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Plus","ShowCaption",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","IND_FLAG","Visible",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DATE_DUE","Visible",True)
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JOB","Caption","WO ")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","SUFFIX","Caption","Suffix ")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PART","Caption","Part ")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DESCRIPTION","Caption","Description ")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PRODUCT_LINE","Caption","PL ")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_WO","Caption","Parent WO ")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_SUFFIX","Caption","Parent Suf")
+'		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","TOT_MISCISSUES","Caption","Tot. Misc. Issues")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Reviewed","Caption","Reviewed")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Notes","Caption","Notes")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DATE_DUE","Caption","Date Due ")
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Plus","Width","5")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JOB","MinWidth","50")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","SUFFIX","MinWidth","25")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PART","MinWidth","100")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DESCRIPTION","MinWidth","150")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PRODUCT_LINE","MinWidth","40")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_WO","MinWidth","50")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_SUFFIX","MinWidth","25")
+'		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","TOT_MISCISSUES","MinWidth","100")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Reviewed","MinWidth","5")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Notes","MinWidth","300")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DATE_DUE","MinWidth","50")
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JOB","HeaderHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","SUFFIX","HeaderHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PART","HeaderHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DESCRIPTION","HeaderHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_WO","HeaderHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_SUFFIX","HeaderHAlignment","Center")
+'		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","TOT_MISCISSUES","HeaderHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Reviewed","HeaderHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Notes","HeaderHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DATE_DUE","HeaderHAlignment","Center")
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JOB","CellHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","SUFFIX","CellHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PART","CellHAlignment","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DESCRIPTION","CellHAlignment","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_WO","CellHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_SUFFIX","CellHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Reviewed","CellHAlignment","Center")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Notes","CellHAlignment","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DATE_DUE","CellHAlignment","Center")
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PLUS","Fixed","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JOB","Fixed","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","SUFFIX","Fixed","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PART","Fixed","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DESCRIPTION","Fixed","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_WO","Fixed","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_SUFFIX","Fixed","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Reviewed","Fixed","Left")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DATE_DUE","Fixed","Left")
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JOB","ReadOnly",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","SUFFIX","ReadOnly",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PART","ReadOnly",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DESCRIPTION","ReadOnly",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_WO","ReadOnly",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_SUFFIX","ReadOnly",True)
+'		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","TOT_MISCISSUES","ReadOnly",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Reviewed","ReadOnly",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Notes","ReadOnly",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DATE_DUE","ReadOnly",True)
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JOB","AllowEdit",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","SUFFIX","AllowEdit",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PART","AllowEdit",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DESCRIPTION","AllowEdit",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_WO","AllowEdit",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_SUFFIX","AllowEdit",False)
+'		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","TOT_MISCISSUES","AllowEdit",False)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Reviewed","AllowEdit",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","Notes","AllowEdit",True)
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","DATE_DUE","AllowEdit",False)
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","JOB","CellForeColor","Blue")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","SUFFIX","CellForeColor","Blue")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_WO","CellForeColor","Blue")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PARENT_SUFFIX","CellForeColor","Blue")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","NOTES","CellBackColor","LightYellow")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","PART","CellForeColor","Blue")
+	
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty("gvWOs","date_due","DisplayCustomDatetime",d)
+		gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridviewProperty("gvWOs","Showgrouppanel",True)
+		
+		gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridviewProperty("gvWOs","OptionsViewShowAutoFilterRow",True)
+		Function.Intrinsic.Debug.Stop
+		
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.AddGridViewFromDataView("gvMatl","dtRet","dvMatl")
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.AddGridViewFromDataView("gvMatl2","dtRet","dvMatl2")
+		
+		f.Intrinsic.Control.For(v.Local.iCnt,0,1,1)
+			f.Intrinsic.Control.If(v.Local.iCnt,=,0)
+				v.Local.sGVName.Set("gvMatl")
+			f.Intrinsic.Control.Else
+				v.Local.sGVName.Set("gvMatl2")
+			f.Intrinsic.Control.EndIf
+			
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty(v.local.sGVName,"MultiSelect",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty(v.local.sGVName,"AllowSort",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty(v.local.sGVName,"AllowFilter",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty(v.local.sGVName,"OptionsDetailShowDetailTabs",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty(v.local.sGVName,"OptionsViewShowGroupPanel",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetGridViewProperty(v.local.sGVName,"AllowColumnMoving",False)
+		
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JBSF","Visible",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"PART1","Visible",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JSS","Visible",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DTLSeq","Visible",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JSS_DTLSEQ","Visible",False)
+			
+			f.Intrinsic.Control.If(v.Local.sGVName,=,"gvMatl2")
+				Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"Reviewed1","Visible",False)
+				Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"EngReviewed1","Visible",False)
+				Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JobChange","Visible",False)
+			f.Intrinsic.Control.EndIf
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JSS_DTLSEQ","Visible",False)
+			
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DISPLAY_PART1","CellForeColor","Blue")
+		
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"SEQ1","Caption","Seq ")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DISPLAY_PART1","Caption","Part ")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DESCR","Caption","Description")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"PL","Caption","PL")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ESTIMATED","Caption","$ Est")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ESTIMATED","Caption","Units Est.")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ACTUAL","Caption","$ Act")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ACTUAL","Caption","Units Act.")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_DELTA","Caption","Units Delta")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_DELTA","Caption","$ Delta")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"Notes1","Caption","Notes")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"Reviewed1","Caption","Reviewed")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"EngReviewed1","Caption","Eng Reviewed")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JobChange","Caption","Reason Code")
+			
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"SEQ1","AllowEdit",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DISPLAY_PART1","AllowEdit",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DESCR","AllowEdit",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"PL","AllowEdit",False)
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ESTIMATED","AllowEdit",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ESTIMATED","AllowEdit",False)
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ACTUAL","AllowEdit",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ACTUAL","AllowEdit",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_DELTA","AllowEdit",False)
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_DELTA","AllowEdit",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"Notes1","AllowEdit",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"Reviewed1","AllowEdit",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"EngReviewed1","AllowEdit",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JobChange","AllowEdit",True)
+			
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"SEQ1","ReadOnly",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DISPLAY_PART1","ReadOnly",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DESCR","ReadOnly",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"PL","ReadOnly",True)
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ESTIMATED","ReadOnly",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ESTIMATED","ReadOnly",True)
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ACTUAL","ReadOnly",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ACTUAL","ReadOnly",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_DELTA","ReadOnly",True)
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_DELTA","ReadOnly",True)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"Notes1","ReadOnly",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"Reviewed1","ReadOnly",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"EngReviewed1","ReadOnly",False)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JobChange","ReadOnly",False)
+		
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"SEQ1","MinWidth","75")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DISPLAY_PART1","MinWidth","75")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DESCR","MinWidth","200")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"PL","MinWidth","40")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ESTIMATED","MinWidth","50")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ESTIMATED","MinWidth","50")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ACTUAL","MinWidth","50")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ACTUAL","MinWidth","50")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"NOTES1","MinWidth","200")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"EngReviewed1","MinWidth","5")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JobChange","MinWidth","100")
+		
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"SEQ1","HeaderHAlignment","Center")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ESTIMATED","HeaderHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ESTIMATED","HeaderHAlignment","Center")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ACTUAL","HeaderHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ACTUAL","HeaderHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_DELTA","HeaderHAlignment","Center")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_DELTA","HeaderHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"REVIEWED1","HeaderHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"NOTES1","HeaderHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"PL","HeaderHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"EngReviewed1","HeaderHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JobChange","HeaderHAlignment","Center")
+		
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"SEQ1","CellHAlignment","Center")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ESTIMATED","CellHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ESTIMATED","CellHAlignment","Center")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ACTUAL","CellHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ACTUAL","CellHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_DELTA","CellHAlignment","Center")
+			'Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_DELTA","CellHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"REVIEWED1","CellHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"PL","CellHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"EngReviewed1","CellHAlignment","Center")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"JobChange","CellHAlignment","Center")
+		
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"SEQ1","Fixed","Left")
+		
+'			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ESTIMATED","DisplayCustomNumeric","$#,###,###,##0.0000")
+'			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_ACTUAL","DisplayCustomNumeric","$#,###,###,##0.0000")
+'			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"DOLLARS_DELTA","DisplayCustomNumeric","$#,###,###,##0.0000")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ESTIMATED","DisplayCustomNumeric",n2)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_ACTUAL","DisplayCustomNumeric",n2)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"HOURS_DELTA","DisplayCustomNumeric",n2)
+			
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetColumnProperty(v.local.sGVName,"NOTES1","CellBackColor","LightYellow")
+			
+			gui.f_JobMaterialTrans.GsGcJobMaterial.ColumnEdit(v.local.sGVName,"JobChange","Combobox","Job Change*!*Engineering Change")
+		f.Intrinsic.Control.Next(v.Local.iCnt)
+			
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(90)
+		
+		Gui.f_JobMaterialTrans.GsGcJobMaterial.ResumeLayout()
+		gui.f_JobMaterialTrans.GsGcJobMaterial.MainView("gvWOs")
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(100)
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Visible(False)
+		Gui.f_JobMaterialTrans.lblStatus.Visible(False)
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(0)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+		f.Intrinsic.Control.End
+	f.Intrinsic.Control.EndTry
+Program.Sub.FormatGrid.End
+
+Program.Sub.loadPictureLogo.Start
+f.Intrinsic.Control.Try
+
+	'Load the Logo at the top of dash and the Icon
+	v.Local.sIcon.Declare(String)
+	v.Local.sGssLogo.Declare(String)
+	
+	f.Intrinsic.String.Build("{0}\ART\gss2.ico", v.Caller.GlobalDir, v.Local.sIcon)
+	f.Intrinsic.String.Build("{0}\ART\GAB_GSS_Logo_Green_Dash.png", v.Caller.GlobalDir, v.Local.sGssLogo)
+	gui.f_JobMaterialTrans.picGSSLogo.Picture(v.Local.sGssLogo)
+	gui.f_JobMaterialTrans..Icon(v.Local.sIcon)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.loadPictureLogo.End
+
+Program.Sub.EnableScreen.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	gui.f_JobMaterialTrans..Enabled(true)
+	gui.f_JobMaterialTrans.lblStatus.Visible(false)
+	Gui.f_JobMaterialTrans.progressBarStatus.Visible(false)
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.EnableScreen.End
+
+Program.Sub.LockScreen.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	'gui.f_JobMaterialTrans.GsGcJobMaterial.Visible(False)
+	gui.f_JobMaterialTrans..Enabled(false)
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.LockScreen.End
+
+Program.Sub.Serialize.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSerialize.Declare
+	
+	'gvWOs
+	Gui.F_WO.GsGCWO.Serialize("gvWOs",V.Local.sSerialize)
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GVWOS-Job",56071,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,V.Local.sSerialize)
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSerialize.Declare
+	
+	'Delete old registry records
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GVWOS-Job",56071,0,5,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize,<>,"")
+		F.ODBC.Connection!common.OpenConnection(V.Ambient.Ccon,V.Ambient.Cuser,V.Ambient.Cpass)
+		F.ODBC.Connection!common.Execute("Delete From Gs_Registry Where Reg_ID = 56071 And Seq < 1000;")
+		F.ODBC.Connection!common.Close
+	F.Intrinsic.Control.EndIf
+
+	'gvWOs
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GVWOS-Job",56071,1000,6,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize,<>,"")
+		Gui.F_WO.GsGCWO.Deserialize(V.Local.sSerialize)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+Program.Sub.ReloadGrid.Start
+'BM 3/4/20 Updated Logic in sql statement to check delta column by checking if matl issued = matl est, returning 0 if it is, and doing a subtraction if so. Avoids error w highlighting green if parts happen to net to 0
+	f.Intrinsic.Control.Try
+	
+		V.Local.bDictExists.Declare
+		v.Local.sSQL.Declare(string)
+		
+		Gui.f_JobMaterialTrans.lblStatus.Visible(True)
+		Gui.f_JobMaterialTrans.progressBarStatus.Visible(True)
+		Gui.f_JobMaterialTrans.lblStatus.Caption("Loading Work Orders....")
+		Gui.f_JobMaterialTrans.progressBarStatus.Min(0)
+		Gui.f_JobMaterialTrans.progressBarStatus.Max(100)
+		
+		F.Intrinsic.Control.If(V.DataTable.dtWOsTemp.Exists,=,True)
+			F.Data.DataTable.Close("dtWOsTemp")
+		F.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.If(V.DataTable.dtTotalMiscTemp.Exists,=,True)
+			F.Data.DataTable.Close("dtTotalMiscTemp")
+		F.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.If(V.DataTable.dtRetTemp.Exists,=,True)
+			F.Data.DataTable.Close("dtRetTemp")
+		F.Intrinsic.Control.EndIf
+	
+		F.Data.Dictionary.Exists("dIndirectTemp",V.Local.bDictExists)
+		F.Intrinsic.Control.If(V.Local.bDictExists,=,True)
+			F.Data.Dictionary.Close("dIndirectTemp")
+		F.Intrinsic.Control.EndIf
+		
+		V.Global.bLoadData.Set(True)
+		
+		f.Intrinsic.String.format(v.Screen.f_JobMaterialTrans!dtpFrom.Value,"yyyy-MM-DD",v.Global.sFromDate)
+		f.Intrinsic.String.format(v.Screen.f_JobMaterialTrans!dtpTo.Value,"yyyy-MM-DD",v.Global.sToDate)
+		
+		
+		F.Data.Dictionary.CreateFromSQL("dIndirectTemp","con","SELECT DISTINCT CONCAT(JOB,SUFFIX) AS JS,CONVERT(IF('' = '',1,0),SQL_BIT) FROM IND_LBR_ACCTS;")
+		F.Data.Dictionary.SetDefaultReturn("dIndirectTemp",False)
+		
+		f.Intrinsic.String.Build("SELECT '' as PLUS,convert(isnull(d.REVIEWED,0),sql_bit) as Reviewed,A.DATE_DUE,A.JOB,A.SUFFIX,A.PART,A.DESCRIPTION,a.product_line,if(a.PARENT_WO='','',a.PARENT_WO) as PARENT_WO,IF(a.parent_WO='','',a.parent_suffix_parent) as PARENT_SUFFIX, CONCAT(A.JOB,A.SUFFIX) AS JS, CONVERT(0,SQL_BIT) AS IND_FLAG,  D.NOTES FROM V_JOB_HEADER A left join GCG_5607_REVNOTES d on a.job=d.job and a.suffix=d.suffix where a.date_due between '{0}' and '{1}' ORDER BY A.DATE_DUE,A.JOB,A.SUFFIX;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSQL)
+
+
+		F.Data.DataTable.CreateFromSQL("dtRetTemp","con",v.Local.sSQL,True)
+		
+'		f.Data.datatable.CreateFromSQL("dtTotalMiscTemp","con","SELECT JOB, SUFFIX, SUM(HOURS_ACTUAL) AS TOT_MISCISSUES FROM V_JOB_OPERATIONS WHERE SEQ = 995000 GROUP BY JOB, SUFFIX;",True)
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(15)
+		
+'		f.Data.Linq.Join("innerjoin","datatable","dtWOsTemp*!*M","datatable","dtTotalMiscTemp*!*S","M.Job=S.Job AND M.Suffix=S.Suffix","M.PLUS*!*M.REVIEWED*!*M.JOB*!*M.SUFFIX*!*M.PART*!*M.DESCRIPTION*!*M.PARENT_WO*!*M.PARENT_SUFFIX*!*M.PARENT_PART*!*M.PARENT_DESCRIPTION*!*M.TOT_MATERIALISSUES*!*M.TOT_ESTMATERIAL*!*M.DELTA*!*M.JS*!*M.IND_FLAG*!*M.DATE_DUE*!*S.TOT_MISCISSUES*!*M.NOTES","","","","dtRetTemp",True)
+		
+		Gui.f_JobMaterialTrans.progressBarStatus.Value(25)
+		
+		'f.Data.datatable.CreateFromSQL("dtTotalMat","con","SELECT JOB, SUFFIX, SUM(HOURS_ACTUAL) AS TOT_MAT_ISSUED, SUM(HOURS_ESTIMATED) FROM V_JOB_DETAIL WHERE SEQ NOT IN ('995000', '998000') and LMO='M' GROUP BY JOB, SUFFIX;",True)
+		
+		F.Data.DataTable.FillFromDictionary("dtRetTemp","dIndirectTemp","JS","IND_FLAG")
+		
+		'Remove indirect Jobs
+		F.Data.DataView.Create("dtRetTemp","dvWOs",22,"IND_FLAG <> True","DATE_DUE ASC,JOB ASC,SUFFIX ASC")
+		
+		'Create temp table, delete rows out of original, merge the two
+		f.Data.DataTable.DeleteRow("dtRet")
+		f.Data.Datatable.acceptchanges("dtRet")
+		f.Data.DataTable.Merge("dtRetTemp","dtRet",True,2)
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.ReloadGrid.End
+
+Program.Sub.ReloadDTDVGVMatl.Start
+	f.Intrinsic.Control.Try
+		v.Local.sSql.Declare(string)
+		
+		F.Intrinsic.Control.If(V.DataTable.dtMatlTemp.Exists,=,True)
+			F.Data.DataTable.Close("dtMatlTemp")
+		F.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.If(V.DataTable.dtMatlTemp2.Exists,=,True)
+			F.Data.DataTable.Close("dtMatlTemp2")
+		F.Intrinsic.Control.EndIf
+		
+		f.Data.DataTable.acceptchanges("dtRet")
+		f.Data.DataTable.acceptchanges("dtRet$dtMatl")
+		f.Data.DataTable.acceptchanges("dtRet$dtMatl2")
+	
+		'Query pulls all standard job sequences and only pulls the misc material and rework material sequences if they have material applied
+		'Edit (DD - 10/23/19) - Added columns for qty issued, date/time issued, reviewed, and notes
+		'Edit (DD - 1/7/20) - Removed columns for qty issued, date/time issued per customer's request
+		'Edit (BM- 3/4/20)- Reversed how units delta is calculated ie Units act - units est. per customer's request
+'		f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as PL,A.DOLLARS_ESTIMATED, A.DOLLARS_ACTUAL, A.DOLLARS_ESTIMATED-A.DOLLARS_ACTUAL as DOLLARS_DELTA, A.HOURS_ESTIMATED, A.HOURS_ACTUAL, A.HOURS_ESTIMATED-A.HOURS_ACTUAL AS HOURS_DELTA, convert(0.00, sql_float) as QtyIssued, convert('1900-01-01',sql_date) as DateIssued, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, '' as DTLSeq FROM V_JOB_OPERATIONS A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where A.date_due between '{0}' and '{1}') AND SEQ1 < 995000 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)		
+		f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,ltrim(rtrim(CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ))) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as PL, A.HOURS_ESTIMATED, A.HOURS_ACTUAL, A.HOURS_ACTUAL-A.HOURS_ESTIMATED AS HOURS_DELTA, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, '' as DTLSeq FROM V_JOB_OPERATIONS A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where A.date_due between '{0}' and '{1}') AND SEQ1 < 995000 AND A.HOURS_ACTUAL-A.HOURS_ESTIMATED <> 0 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)
+		
+		F.Data.DataTable.CreateFromSQL("dtMatlTemp","con",v.Local.sSql,True)
+		F.Data.DataTable.AddDisplayPartColumn("dtMatlTemp",0,"PART1","DISPLAY_PART1")
+		
+		f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,ltrim(rtrim(CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ))) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as PL, A.HOURS_ESTIMATED, A.HOURS_ACTUAL, A.HOURS_ACTUAL-A.HOURS_ESTIMATED AS HOURS_DELTA, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, '' as DTLSeq FROM V_JOB_OPERATIONS A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where A.date_due between '{0}' and '{1}') AND SEQ1 < 995000 AND A.HOURS_ACTUAL-A.HOURS_ESTIMATED = 0 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)
+		
+		F.Data.DataTable.CreateFromSQL("dtMatlTemp2","con",v.Local.sSql,True)
+		F.Data.DataTable.AddDisplayPartColumn("dtMatlTemp2",0,"PART1","DISPLAY_PART1")
+		
+		'Fill in Qty Issued and Date/Time Issued column.  For regular sequences, this should be the last qty and date charged.  For misc, it should be the qty and date of the record.
+		'--Get the top record for each open job
+'		f.data.DataTable.CreateFromSQL("dtTopRecords","con","select distinct concat(concat(job,suffix),seq) as JSS, concat(concat(job,suffix),seq) + max(concat(date_sequence_uf,sequence_key)) as SeqKey, convert(0, sql_float) as QtyIssued, convert('1900-01-01',sql_date) as DateIssued from v_job_detail where seq < '995000' and lmo='M' group by job, suffix, seq;")
+'		'--Get the detail records for jobs, including the qty issued and date it was issued on, fill the qty issued and date issued
+'		f.data.dictionary.CreateFromSQL("dictIssues","con","select concat(concat(job,suffix),seq) + max(concat(date_sequence_uf,sequence_key)), hours_worked from v_job_detail where seq < '995000' and lmo='M' group by job, suffix, seq, hours_worked;")
+'		f.data.dictionary.CreateFromSQL("dictDateIssued","con","select concat(concat(job,suffix),seq) + max(concat(date_sequence_uf,sequence_key)), charge_date from v_job_detail where seq < '995000' and lmo='M' group by job, suffix, seq, charge_date;")
+'		f.Data.Dictionary.SetDefaultReturn("dictIssues",0)
+'		f.Data.Dictionary.SetDefaultReturn("dictDateIssued","1900-01-01")
+'		f.Data.DataTable.FillFromDictionary("dtTopRecords","dictIssues","SeqKey","QtyIssued")
+'		f.Data.DataTable.FillFromDictionary("dtTopRecords","dictDateIssued","SeqKey","DateIssued")
+'		f.Data.Dictionary.Close("dictIssues")
+'		f.Data.Dictionary.Close("dictDateIssued")
+'		
+'		'Create dictionaries from dtTopRecords to fill in the qty and date for last issue transactions
+'		f.Data.Dictionary.CreateFromDatatable("dictIssues","dtTopRecords","JSS","QtyIssued")
+'		f.Data.Dictionary.CreateFromDatatable("dictDateIssued","dtTopRecords","JSS","DateIssued")
+'		f.Data.Dictionary.SetDefaultReturn("dictIssues",0)
+'		f.Data.Dictionary.SetDefaultReturn("dictDateIssued","1900-01-01")
+'		f.Data.DataTable.FillFromDictionary("dtMatlTemp","dictIssues","JSS","QtyIssued")
+'		f.Data.DataTable.FillFromDictionary("dtMatlTemp","dictDateIssued","JSS","DateIssued")
+'		f.Data.Dictionary.Close("dictIssues")
+'		f.Data.Dictionary.Close("dictDateIssued")
+		
+		'Get lines for misc material seqs from job detail, merge into master detail DT
+		f.Intrinsic.String.Build("SELECT DISTINCT CONCAT(A.JOB,A.SUFFIX) AS JBSF,ltrim(rtrim(CONCAT(CONCAT(A.JOB,A.SUFFIX),A.SEQ))) AS JSS, A.SEQ AS SEQ1,COALESCE(A.PART,'') AS PART1,'' As DISPLAY_PART1,A.DESCRIPTION AS DESCR, '' as PL, convert(0,sql_float) as HOURS_ESTIMATED, A.HOURS_WORKED AS HOURS_ACTUAL, A.HOURS_WORKED-convert(0,sql_float) AS HOURS_DELTA, CONVERT(0,SQL_BIT) AS Reviewed1, CONVERT(0,SQL_BIT) AS EngReviewed1, '' as JobChange, '' as Notes1, ltrim(rtrim(CONCAT(DATE_SEQUENCE_UF,SEQUENCE_KEY))) as DTLSeq FROM V_JOB_DETAIL A WHERE A.LMO = 'M' AND JBSF IN (SELECT CONCAT(A.JOB,A.SUFFIX) AS JBSFX FROM V_JOB_HEADER A join v_job_operations c on a.job=c.job and a.suffix=c.suffix where A.date_due between '{0}' and '{1}') AND SEQ1 >= 995000 ORDER BY SEQ1;",v.Global.sFromDate,v.Global.sToDate,v.Local.sSql)
+		F.Data.DataTable.CreateFromSQL("dtMiscSeqs","con",v.Local.sSql)
+		F.Data.DataTable.AddDisplayPartColumn("dtMiscSeqs",0,"PART1","DISPLAY_PART1")
+		f.Data.DataTable.Merge("dtMiscSeqs","dtMatlTemp",False,2)
+		f.Data.DataTable.Close("dtMiscSeqs")
+		
+		f.Data.DataTable.AddExpressionColumn("dtMatlTemp","JSS_DTLSEQ","string","JSS+DTLSeq")
+		f.Data.DataTable.AddExpressionColumn("dtMatlTemp2","JSS_DTLSEQ","string","JSS+DTLSeq")
+		'Fill in reviewed and notes at detail level
+		f.Data.Dictionary.CreateFromSQL("dictDtlReviewed","con","select ltrim(rtrim(JSS_DTLSEQ)) as JSS_DTLSEQ, REVIEWED FROM GCG_5607_DTLNOTES;")
+		f.Data.Dictionary.CreateFromSQL("dictDtlNotes","con","select ltrim(rtrim(JSS_DTLSEQ)) as JSS_DTLSEQ, NOTES FROM GCG_5607_DTLNOTES;")
+		f.Data.Dictionary.CreateFromSQL("dictDtlEngChange","con","select ltrim(rtrim(JSS_DTLSEQ)) as JSS_DTLSEQ, ENG_CHANGE FROM GCG_5607_DTLNOTES;")
+		f.Data.Dictionary.CreateFromSQL("dictDtlEngReviewed","con","select ltrim(rtrim(JSS_DTLSEQ)) as JSS_DTLSEQ, ENG_REVIEWED FROM GCG_5607_DTLNOTES;")
+		f.Data.Dictionary.SetDefaultReturn("dictDtlReviewed",False)
+		f.Data.Dictionary.SetDefaultReturn("dictDtlNotes","")
+		f.Data.Dictionary.SetDefaultReturn("dictDtlEngReviewed",False)
+		f.Data.Dictionary.SetDefaultReturn("dictDtlEngChange","")
+		f.Data.DataTable.FillFromDictionary("dtMatlTemp","dictDtlReviewed","JSS","Reviewed1")
+		f.Data.DataTable.FillFromDictionary("dtMatlTemp","dictDtlNotes","JSS","Notes1")
+		f.Data.DataTable.FillFromDictionary("dtMatlTemp","dictDtlEngChange","JSS","JobChange")
+		f.Data.DataTable.FillFromDictionary("dtMatlTemp","dictDtlEngReviewed","JSS","EngReviewed1")
+		f.Data.DataTable.FillFromDictionary("dtMatlTemp2","dictDtlReviewed","JSS","Reviewed1")
+		f.Data.DataTable.FillFromDictionary("dtMatlTemp2","dictDtlNotes","JSS","Notes1")
+		f.Data.DataTable.FillFromDictionary("dtMatlTemp2","dictDtlEngChange","JSS","JobChange")
+		f.Data.DataTable.FillFromDictionary("dtMatlTemp2","dictDtlEngReviewed","JSS","EngReviewed1")
+		f.Data.Dictionary.Close("dictDtlReviewed")
+		f.Data.Dictionary.Close("dictDtlNotes")	
+		f.Data.Dictionary.Close("dictDtlEngChange")	
+		f.Data.Dictionary.Close("dictDtlEngReviewed")
+		
+		'Create temp table, delete rows out of original, merge the two
+		f.Data.DataTable.DeleteRow("dtRet$dtMatl")
+		f.Data.Datatable.acceptchanges("dtRet$dtMatl")
+		f.Data.DataTable.DeleteRow("dtRet$dtMatl2")
+		f.Data.Datatable.acceptchanges("dtRet$dtMatl2")
+		f.Data.DataTable.Merge("dtMatlTemp","dtRet$dtMatl",True,2)
+		f.Data.DataTable.Merge("dtMatlTemp2","dtRet$dtMatl2",True,2)
+		
+		f.Data.DataTable.acceptchanges("dtRet$dtMatl")
+		f.Data.DataTable.acceptchanges("dtRet$dtMatl2")
+		'Create dict for PL
+		f.Data.Dictionary.CreateFromSQL("dictPL","con","select part, product_line from v_inventory_all;")
+		f.Data.Dictionary.SetDefaultReturn("dictPL","")
+		f.Data.DataTable.FillFromDictionary("dtRet$dtMatl","dictPL","Part1","PL")
+		f.Data.DataTable.FillFromDictionary("dtRet$dtMatl2","dictPL","Part1","PL")
+		f.Data.Dictionary.Close("dictPL")
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.ReloadDTDVGVMatl.End
+
+Program.Sub.mouseCellEnter.Start
+F.Intrinsic.Control.Try	
+
+	V.Global.sSelectedGrid.Set(V.Args.GridViewName)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+F.Intrinsic.Control.EndTry
+Program.Sub.mouseCellEnter.End
+
+Program.Sub.CheckTable.Start
+	F.Intrinsic.Control.Try	
+	
+		V.Local.bExists.Declare(Boolean)
+	
+		F.ODBC.Connection!con.TableExists("GCG_5607_REVNOTES",V.Local.bExists)
+		F.Intrinsic.Control.If(V.Local.bExists,=,False)
+			F.ODBC.Connection!con.Execute("CREATE TABLE GCG_5607_REVNOTES(JS CHAR(9) NOT NULL,JOB CHAR(6),SUFFIX CHAR(3),NOTES LONGVARCHAR,REVIEWED BIT,PRIMARY KEY (JS));")
+			F.ODBC.Connection!con.Execute("CREATE INDEX GCG_5607_REVNOTES01 USING 1 ON GCG_5607_REVNOTES(JOB);")
+			F.ODBC.Connection!con.Execute("CREATE INDEX GCG_5607_REVNOTES02 USING 2 ON GCG_5607_REVNOTES(SUFFIX);")
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.CheckTable.End
+
+Program.Sub.SaveCustomCols.Start
+	'Get Reviewed and Notes columns' values using the rowIndex passed through args.  Save them to db table.
+	F.Intrinsic.Control.Try
+	
+		V.Local.sSQL.Declare(String)
+		V.Local.sJS.Declare(String)
+		V.Local.sJob.Declare(String)
+		V.Local.sSuffix.Declare(String)
+		V.Local.sText.Declare(string)
+		v.Local.bReviewed.Declare(boolean,False)
+		v.Local.iReviewed.Declare(long)
+		v.Local.bEngReviewed.Declare(boolean)
+		v.Local.iEngReviewed.Declare(long)
+		v.Local.sJobChange.Declare(string)
+		v.Local.iColIndex.Declare(long)
+		
+		f.Intrinsic.Control.If(v.Args.GV,=,"gvWOs")
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","JOB",V.Args.RowInd,V.Local.sJob)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","SUFFIX",V.Args.RowInd,V.Local.sSuffix)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","REVIEWED",V.Args.RowInd,V.Local.bReviewed)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName("gvWOs","NOTES",V.Args.RowInd,V.Local.sText)
+		f.Intrinsic.Control.Else
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName(v.Args.gv,"JSS_DTLSEQ",V.Args.RowInd,V.Local.sJS)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName(v.Args.gv,"Reviewed1",V.Args.RowInd,V.Local.bReviewed)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName(v.Args.gv,"NOTES1",V.Args.RowInd,V.Local.sText)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName(v.Args.gv,"EngReviewed1",V.Args.RowInd,V.Local.bEngReviewed)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.GetCellValueByColumnName(v.Args.gv,"JobChange",V.Args.RowInd,V.Local.sJobChange)
+		f.Intrinsic.Control.EndIf
+			
+		'Convert boolean to int
+		f.Intrinsic.Control.If(v.Local.bReviewed,=,true)
+			v.Local.iReviewed.Set(1)
+		f.Intrinsic.Control.Else
+			v.Local.iReviewed.Set(0)
+		f.Intrinsic.Control.EndIf
+		f.Intrinsic.Control.If(v.Local.bEngReviewed,=,true)
+			v.Local.iEngReviewed.Set(1)
+		f.Intrinsic.Control.Else
+			v.Local.iEngReviewed.Set(0)
+		f.Intrinsic.Control.EndIf
+		
+		'Since this event fires before the value of the cell is actually rendered to the user, invert the value
+		f.Intrinsic.Control.If(v.Args.col,=,"REVIEWED","OR",v.Args.col,=,"Reviewed1")
+			f.Intrinsic.Control.If(v.Local.bReviewed,=,True)
+				v.Local.iReviewed.Set(0)
+				v.Local.bReviewed.Set(False)
+			f.Intrinsic.Control.Else
+				v.Local.iReviewed.Set(1)
+				v.Local.bReviewed.Set(True)
+			f.Intrinsic.Control.EndIf
+			gui.f_JobMaterialTrans.GsGcJobMaterial.GetColumnIndexByName(v.Args.gv,"Reviewed1",v.Local.iColIndex)
+			gui.f_JobMaterialTrans.GsGcJobMaterial.SetCellValue(v.Args.gv,v.Local.iColIndex,V.Args.RowInd,v.Local.bReviewed)
+		f.Intrinsic.Control.EndIf
+		f.Intrinsic.Control.If(v.Args.col,=,"EngReviewed1")
+			f.Intrinsic.Control.If(v.Local.bEngReviewed,=,True)
+				v.Local.iEngReviewed.Set(0)
+				v.Local.bEngReviewed.Set(False)
+			f.Intrinsic.Control.Else
+				v.Local.iEngReviewed.Set(1)
+				v.Local.bEngReviewed.Set(True)
+			f.Intrinsic.Control.EndIf
+			gui.f_JobMaterialTrans.GsGcJobMaterial.GetColumnIndexByName(v.Args.gv,"EngReviewed1",v.Local.iColIndex)
+			gui.f_JobMaterialTrans.GsGcJobMaterial.SetCellValue(v.Args.gv,v.Local.iColIndex,V.Args.RowInd,v.Local.bEngReviewed)
+		f.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.String.Replace(V.Local.sText,"'","''",V.Local.sText)
+		f.Intrinsic.Control.If(v.Args.gv,=,"gvWOs")
+			F.Intrinsic.String.Build("{0}{1}",V.Local.sJob,V.Local.sSuffix,V.Local.sJS)
+			F.Intrinsic.String.Build("SELECT * FROM GCG_5607_REVNOTES WHERE JS = '{0}';",V.Local.sJS,V.Local.sSQL)
+			F.ODBC.Connection!con.OpenRecordsetRW("rstNotes",V.Local.sSQL)
+			F.Intrinsic.Control.If(V.ODBC.con!rstNotes.EOF,=,True)
+				F.Intrinsic.String.Build("INSERT INTO GCG_5607_REVNOTES(JS,JOB,SUFFIX,NOTES,REVIEWED) VALUES('{0}','{1}','{2}','{3}',{4});",V.Local.sJS,V.Local.sJob,V.Local.sSuffix,V.Local.sText,v.Local.iReviewed,V.Local.sSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sSQL)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Build("DELETE FROM GCG_5607_REVNOTES WHERE JS = '{0}';",V.Local.sJS,V.Local.sSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sSQL)
+				F.Intrinsic.String.Build("INSERT INTO GCG_5607_REVNOTES(JS,JOB,SUFFIX,NOTES,REVIEWED) VALUES('{0}','{1}','{2}','{3}',{4});",V.Local.sJS,V.Local.sJob,V.Local.sSuffix,V.Local.sText,v.Local.iReviewed,V.Local.sSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sSQL)
+			F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstNotes.Close
+		f.Intrinsic.Control.Else
+			F.Intrinsic.String.Build("SELECT * FROM GCG_5607_DTLNOTES WHERE JSS_DTLSEQ = '{0}';",V.Local.sJS,V.Local.sSQL)
+			F.ODBC.Connection!con.OpenRecordsetRW("rstNotes",V.Local.sSQL)
+			F.Intrinsic.Control.If(V.ODBC.con!rstNotes.EOF,=,True)
+				F.Intrinsic.String.Build("INSERT INTO GCG_5607_DTLNOTES(JSS_DTLSEQ,NOTES,REVIEWED,ENG_REVIEWED,ENG_CHANGE) VALUES('{0}','{1}',{2},{3},'{4}');",V.Local.sJS,V.Local.sText,v.Local.iReviewed,V.Local.iEngReviewed,v.Local.sJobChange,V.Local.sSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sSQL)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Build("DELETE FROM GCG_5607_DTLNOTES WHERE JSS_DTLSEQ = '{0}';",V.Local.sJS,V.Local.sSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sSQL)
+				F.Intrinsic.String.Build("INSERT INTO GCG_5607_DTLNOTES(JSS_DTLSEQ,NOTES,REVIEWED,ENG_REVIEWED,ENG_CHANGE) VALUES('{0}','{1}',{2},{3},'{4}');",V.Local.sJS,V.Local.sText,v.Local.iReviewed,V.Local.iEngReviewed,v.Local.sJobChange,V.Local.sSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sSQL)
+			F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstNotes.Close
+		f.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.SaveCustomCols.End
+
+Program.Sub.FormatSubGrids.Start
+	v.Local.iCnt.Declare(long)
+	v.Local.iRet.Declare(long)
+	
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtRet$dtMatl.RowCount--,1)
+		Function.Intrinsic.Math.Mod(V.Local.iCnt,2,V.Local.iRet)
+		Function.Intrinsic.Control.If(V.Local.iRet,=,0)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetRowAppearance("gvMatl",V.Local.iCnt,"BackColor","AliceBlue")
+		Function.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	v.Local.iCnt.Set(0)
+	
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtRet$dtMatl2.RowCount--,1)
+		Function.Intrinsic.Math.Mod(V.Local.iCnt,2,V.Local.iRet)
+		Function.Intrinsic.Control.If(V.Local.iRet,=,0)
+			Gui.f_JobMaterialTrans.GsGcJobMaterial.SetRowAppearance("gvMatl2",V.Local.iCnt,"BackColor","AliceBlue")
+		Function.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+Program.Sub.FormatSubGrids.End
