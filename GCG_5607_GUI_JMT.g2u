@@ -1,0 +1,148 @@
+Program.Sub.ScreenSU.Start
+Gui.frmRO_JMT..Create
+Gui.frmRO_JMT..Caption("Job Material Summary")
+Gui.frmRO_JMT..Size(15285,7410)
+Gui.frmRO_JMT..MinX(0)
+Gui.frmRO_JMT..MinY(0)
+Gui.frmRO_JMT..Position(0,0)
+Gui.frmRO_JMT..BackColor(-2147483633)
+Gui.frmRO_JMT..MousePointer(0)
+Gui.frmRO_JMT..Event(UnLoad,frmRO_JMT_UnLoad)
+Gui.frmRO_JMT.GsGcJMT.Create(GsGridControl)
+Gui.frmRO_JMT.GsGcJMT.Size(15090,6795)
+Gui.frmRO_JMT.GsGcJMT.Position(15,0)
+Gui.frmRO_JMT.GsGcJMT.Anchor(15)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'TJS Sept 2020
+'Customer: Haskris
+'Customer requested a read only version of their Job Material Transactions Summary Dashboard to open from the Gui Script 3 button
+'This version pulls the operation lines where the material actual does not match the estimated.
+'Quote 12100
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.SelectCase(V.Caller.Hook)
+	F.Intrinsic.Control.Case(15710)
+		V.Passed.000021.set("JMT")
+	F.Intrinsic.Control.Case(15780)
+		F.Intrinsic.Control.CallSub("JMTData")
+	F.Intrinsic.Control.CaseElse
+		F.Intrinsic.Control.End
+F.Intrinsic.Control.EndSelect
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.JMTData.Start
+F.Intrinsic.Control.Try
+V.Local.sSQL.Declare
+V.Local.sCaption.Declare
+
+F.Intrinsic.String.Build("Job Material Transaction Discrepancies for {0} {1}",V.Passed.009990.Trim,V.Passed.009991.Trim,V.Local.sCaption)
+Gui.frmRO_JMT..Caption(V.Local.sCaption)
+
+F.ODBC.Connection!conts.OpenCompanyConnection
+
+'F.Intrinsic.String.Build("select A.JOB+A.SUFFIX+RTRIM(A.SEQ) as JSS_DTLSEQ,A.SEQ,RTRIM(A.PART) as PART,A.DESCRIPTION,' ' as PL,A.HOURS_ESTIMATED,A.HOURS_ACTUAL,A.HOURS_ACTUAL - A.HOURS_ESTIMATED as UNITS_DELTA from JOB_OPERATIONS A where A.JOB = '{0}' and A.SUFFIX = '{1}' and A.LMO = 'M' and left(A.SEQ,3) != '995' and UNITS_DELTA != 0;",V.Passed.009990.Trim,V.Passed.009991.Trim,V.Local.sSQL)
+
+F.Intrinsic.String.Build("select A.JOB+A.SUFFIX+RTRIM(A.SEQ) as JSS_DTLSEQ,A.SEQ,RTRIM(A.PART) as PART,A.DESCRIPTION,' ' as PL,A.HOURS_ESTIMATED,A.HOURS_ACTUAL,A.HOURS_ACTUAL - A.HOURS_ESTIMATED as UNITS_DELTA from JOB_OPERATIONS A where A.JOB = '{0}' and A.SUFFIX = '{1}' and A.LMO = 'M' and Left(A.SEQ,3) <> '995' and UNITS_DELTA != 0;",V.Passed.009990.Trim,V.Passed.009991.Trim,V.Local.sSQL)
+
+F.Data.DataTable.CreateFromSQL("dtDisc","conts",V.Local.sSQL,True)
+
+F.Intrinsic.Control.If(V.DataTable.dtDisc.RowCount,=,0)
+	F.Intrinsic.String.Build("There are no unresolved material lines for {0}-{1}",V.Passed.009990.Trim,V.Passed.009991.Trim,V.Local.sSQL)
+	F.Intrinsic.UI.Msgbox(V.Local.sSQL)
+	F.ODBC.Connection!conts.Close
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("select A.JOB+A.SUFFIX+RTRIM(A.SEQ) as JSS_DTLSEQ,A.SEQ,RTRIM(A.PART) as PART,A.DESCRIPTION,' ' as PL,A.HOURS_WORKED as HOURS_ACTUAL from JOB_DETAIL A where A.JOB = '{0}' and A.SUFFIX = '{1}' and Left(A.SEQ,3) = '995' and A.HOURS_WORKED > 0",V.Passed.009990.Trim,V.Passed.009991.Trim,V.Local.sSQL)
+
+F.Data.DataTable.CreateFromSQL("dtMisc","conts",V.Local.sSQL)
+
+F.Data.DataTable.Merge("dtMisc","dtDisc",True,1)
+
+F.Data.DataTable.Close("dtMisc")
+
+F.Data.Dictionary.CreateFromSQL("dictPL","conts","Select RTRIM(PART) as PART, RTRIM(PRODUCT_LINE) as PL from V_INVENTORY_ALL;")
+F.Data.Dictionary.SetDefaultReturn("dictPL","")
+F.Data.DataTable.FillFromDictionary("dtDisc","dictPL","PART","PL")
+F.Data.Dictionary.Close("dictPL")
+
+F.ODBC.Connection!conts.Close
+
+F.Data.DataTable.RemoveColumn("dtDisc","JSS_DTLSEQ")
+
+F.Intrinsic.Control.CallSub(JMTGrid)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.JMTData.End
+
+Program.Sub.JMTGrid.Start
+F.Intrinsic.Control.Try
+
+Gui.frmRO_JMT.GsGcJMT.AddGridviewFromDatatable("gvDisc","dtDisc")
+Gui.frmRO_JMT.GsGcJMT.MainView("gvDisc")
+
+Gui.frmRO_JMT.GsGcJMT.SetGridviewProperty("gvDisc","Editable",False)
+Gui.frmRO_JMT.GsGcJMT.SetGridviewProperty("gvDisc","ReadOnly",True)
+
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","SEQ","Caption","Seq")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","PART","Caption","Part")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","DESCRIPTION","Caption","Description")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","HOURS_ESTIMATED","Caption","Units Est.")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","HOURS_ACTUAL","Caption","Units Act.")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","UNITS_DELTA","Caption","Units Delta")
+'Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","ENG_CHANGE","Caption","Reason Code")
+'Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","NOTES","Caption","Notes")
+
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","SEQ","HeaderFontBold",True)
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","PART","HeaderFontBold",True)
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","DESCRIPTION","HeaderFontBold",True)
+'Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","WC","HeaderFontBold",True)
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","PL","HeaderFontBold",True)
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","HOURS_ESTIMATED","HeaderFontBold",True)
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","HOURS_ACTUAL","HeaderFontBold",True)
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","UNITS_DELTA","HeaderFontBold",True)
+'Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","ENG_CHANGE","HeaderFontBold",True)
+'Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","NOTES","HeaderFontBold",True)
+
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","SEQ","Width","75")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","PART","Width","150")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","DESCRIPTION","Width","200")
+'Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","WC","Width","50")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","PL","Width","50")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","HOURS_ESTIMATED","Width","100")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","HOURS_ACTUAL","Width","100")
+Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","UNITS_DELTA","Width","100")
+'Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","ENG_CHANGE","Width","150")
+'Gui.frmRO_JMT.GsGcJMT.SetColumnProperty("gvDisc","NOTES","Width","200")
+
+Gui.frmRO_JMT..Show
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Error,"SubRoutine",V.Ambient.CurrentSubroutine,"eNumber",V.Ambient.ErrorNumber,"eDescription",V.Ambient.ErrorDescription)
+F.Intrinsic.Control.EndTry
+Program.Sub.JMTGrid.End
+
+Program.Sub.frmRO_JMT_UnLoad.Start
+	F.Intrinsic.Control.End
+Program.Sub.frmRO_JMT_UnLoad.End
+
+Program.Sub.Error.Start
+V.Local.sError.Declare
+V.Local.iRet.Declare
+V.Local.sSep.Declare
+
+F.Intrinsic.String.Build("-------------------------------------------------------------------------------------",,V.Local.sSep)
+F.Intrinsic.String.Build("({5}-{6}){0}{7}{0}Project: {4}{0}{7}{0}Sub: {1}{0}Error: {2}, {3}", V.Ambient.NewLine, V.Args.SubRoutine, V.Args.eNumber, V.Args.eDescription,V.Caller.ScriptFile,V.Ambient.Date, V.Ambient.Time,V.Local.sSep,V.Local.sError)
+F.Intrinsic.UI.Msgbox(V.Local.sError,"Error",V.Local.iRet)
+Program.Sub.Error.End
